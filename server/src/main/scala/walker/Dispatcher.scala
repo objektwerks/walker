@@ -19,9 +19,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case Login(emailAddress, pin)   => login(emailAddress, pin)
       case Deactivate(license)        => deactivateAccount(license)
       case Reactivate(license)        => reactivateAccount(license)
-      case ListSwimmers(_, accountId) => listSwimmers(accountId)
-      case SaveSwimmer(_, swimmer)    => saveSwimmer(swimmer)
-      case ListSessions(_, swimmerId) => listSessions(swimmerId)
+      case ListWalkers(_, accountId)  => listWalkers(accountId)
+      case SaveWalker(_, walker)      => saveWalker(walker)
+      case ListSessions(_, walkerId)  => listSessions(walkerId)
       case SaveSession(_, session)    => saveSession(session)
       case AddFault(_, fault)         => addFault(fault)
 
@@ -77,19 +77,19 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Reactivate account failed for license: $license")
     )
 
-  private def listSwimmers(accountId: Long): Event =
+  private def listWalkers(accountId: Long): Event =
     Try {
-      SwimmersListed(store.listSwimmers(accountId))
-    }.recover { case NonFatal(error) => Fault("List swimmers failed:", error) }
+      WalkersListed(store.listSwimmers(accountId))
+    }.recover { case NonFatal(error) => Fault("List walkers failed:", error) }
      .get
 
-  private def saveSwimmer(swimmer: Swimmer): Event =
+  private def saveWalker(walker: Walker): Event =
     Try {
-      SwimmerSaved(
-        if swimmer.id == 0 then store.addSwimmer(swimmer)
-        else store.updateSwimmer(swimmer)
+      WalkerSaved(
+        if walker.id == 0 then store.addSwimmer(walker)
+        else store.updateSwimmer(walker)
       )
-    }.recover { case NonFatal(error) => Fault("Save swimmer failed:", error) }
+    }.recover { case NonFatal(error) => Fault("Save walker failed:", error) }
      .get
 
   private def listSessions(swimmerId: Long): Event =
