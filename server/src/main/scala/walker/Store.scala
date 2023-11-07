@@ -153,7 +153,7 @@ final class Store(config: Config,
     }
 
   def listWalkers(accountId: Long): List[Walker] = DB readOnly { implicit session =>
-    sql"select * from swimmer where account_id = $accountId order by name"
+    sql"select * from walker where account_id = $accountId order by name"
       .map(rs =>
         Walker(
           rs.long("id"),
@@ -164,7 +164,7 @@ final class Store(config: Config,
       .list()
   }
 
-  def addSwimmer(walker: Walker): Long = DB localTx { implicit session =>
+  def addWalker(walker: Walker): Long = DB localTx { implicit session =>
     sql"""
       insert into walker(account_id, name) values(${walker.accountId}, ${walker.name})
       """

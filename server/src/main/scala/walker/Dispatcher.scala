@@ -86,7 +86,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def saveWalker(walker: Walker): Event =
     Try {
       WalkerSaved(
-        if walker.id == 0 then store.addSwimmer(walker)
+        if walker.id == 0 then store.addWalker(walker)
         else store.updateWalker(walker)
       )
     }.recover { case NonFatal(error) => Fault("Save walker failed:", error) }
