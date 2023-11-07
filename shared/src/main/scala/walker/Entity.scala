@@ -46,10 +46,10 @@ final case class Session(id: Long = 0,
                          walkerId: Long,
                          weight: Int = 150,
                          weightUnit: String = WeightUnit.lb.toString,
-                         distance: Double = 2,
+                         distance: Double = 2.0,
                          distanceUnit: String = DistanceUnit.mi.toString,
                          hours: Int = 0,
-                         minutes: Int = 30,
+                         minutes: Int = 40,
                          calories: Int = 150,
                          datetime: Long = Instant.now.toEpochMilli) extends Entity:
   val weightProperty = ObjectProperty[Double](this, "weight", weight)
@@ -62,14 +62,14 @@ final case class Session(id: Long = 0,
   val datetimeProperty = ObjectProperty[String](this, "datetime", Entity.format(datetime))
   val session = this
 
-  def calculateMinutes(): Int = (hours * 60) + minutes
+  def minutesWalked(): Int = (hours * 60) + minutes
 
   def caloriesBurned(): Int =
     if weight < 1.0 || minutes < 1 then 0
     else
       val kg = if WeightUnit.lb.toString == weightUnit then WeightUnit.lbsToKgs(weight) else weight.toDouble
       val met = (Session.MET * 3.5 * kg) / 200
-      val mins = calculateMinutes()
+      val mins = minutesWalked()
       ( mins * met ).round.toInt
 
 object Session:
