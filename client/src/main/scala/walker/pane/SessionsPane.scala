@@ -22,37 +22,21 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
         text = context.headerWeightUnit
         cellValueFactory = _.value.weightUnitProperty
       ,
-      new TableColumn[Session, Int]:
-        text = context.headerLaps
-        cellValueFactory = _.value.lapsProperty
-      ,
-      new TableColumn[Session, Int]:
-        text = context.headerLapDistance
-        cellValueFactory = _.value.lapDistanceProperty
+      new TableColumn[Session, Double]:
+        text = context.headerDistance
+        cellValueFactory = _.value.distanceProperty
       ,
       new TableColumn[Session, String]:
-        text = context.headerLapUnit
-        cellValueFactory = _.value.lapUnitProperty
+        text = context.headerDistanceUnit
+        cellValueFactory = _.value.distanceUnitProperty
       ,
-      new TableColumn[Session, String]:
-        text = context.headerStyle
-        cellValueFactory = _.value.styleProperty
-      ,
-      new TableColumn[Session, Boolean]:
-        text = context.headerKickboard
-        cellValueFactory = _.value.kickboardProperty
-      ,
-      new TableColumn[Session, Boolean]:
-        text = context.headerFins
-        cellValueFactory = _.value.finsProperty
+      new TableColumn[Session, Int]:
+        text = context.headerHours
+        cellValueFactory = _.value.hoursProperty
       ,
       new TableColumn[Session, Int]:
         text = context.headerMinutes
         cellValueFactory = _.value.minutesProperty
-      ,
-      new TableColumn[Session, Int]:
-        text = context.headerSeconds
-        cellValueFactory = _.value.secondsProperty
       ,
       new TableColumn[Session, Int]:
         text = context.headerCalories
