@@ -2,6 +2,12 @@ Walker
 -------
 >Walker app using Scala 3, ScalaFX, ScalikeJdbc, Jsoniter, JoddMail and PostgreSql.
 
+Todo
+----
+1. Test Client
+2. Update login and register pngs.
+3. Add app png
+
 Model
 -----
 >A session represents a workout, requiring the user to **replicate** data across sessions.
