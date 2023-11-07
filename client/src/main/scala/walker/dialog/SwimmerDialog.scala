@@ -1,11 +1,11 @@
-package swimmer.dialog
+package walker.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import swimmer.{Client, Context, Swimmer}
+import walker.{Client, Context, Swimmer}
 
 final class SwimmerDialog(context: Context, swimmer: Swimmer) extends Dialog[Swimmer]:
   initOwner(Client.stage)

@@ -1,4 +1,4 @@
-package swimmer.dialog
+package walker.dialog
 
 import java.awt.Toolkit
 
@@ -6,7 +6,7 @@ import scalafx.scene.control.{Alert, ButtonType}
 import scalafx.scene.control.Alert.AlertType
 import scalafx.stage.Stage
 
-import swimmer.Context
+import walker.Context
 
 object Alerts:
   val centerX = Toolkit.getDefaultToolkit.getScreenSize.width / 2.4

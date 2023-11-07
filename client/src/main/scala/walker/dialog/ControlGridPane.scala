@@ -1,4 +1,4 @@
-package swimmer.dialog
+package walker.dialog
 
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label

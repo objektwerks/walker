@@ -1,4 +1,4 @@
-package swimmer.dialog
+package walker.dialog
 
 import java.time.LocalDate
 
@@ -6,8 +6,8 @@ import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import swimmer.{Account, Client, Context, Deactivate, Reactivate}
-import swimmer.Validator.*
+import walker.{Account, Client, Context, Deactivate, Reactivate}
+import walker.Validator.*
 
 final case class DeactivateReactivate(deactivate: Option[Deactivate] = None,
                                       reactivate: Option[Reactivate] = None)

@@ -1,11 +1,11 @@
-package swimmer.dialog
+package walker.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TabPane}
 import scalafx.scene.layout.VBox
 
-import swimmer.{Client, Context, Model}
-import swimmer.chart.{CaloriesChart, DistanceChart, WeightChart}
+import walker.{Client, Context, Model}
+import walker.chart.{CaloriesChart, DistanceChart, WeightChart}
 
 final class ChartDialog(context: Context, model: Model) extends Dialog:
   initOwner(Client.stage)

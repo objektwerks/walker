@@ -1,4 +1,4 @@
-package swimmer.dialog
+package walker.dialog
 
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
@@ -6,8 +6,8 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import swimmer.{Client, Context, Entity, LapUnit, Session, Style, WeightUnit}
-import swimmer.control.{CalorieTextField, DateTimeSelector, IntTextField}
+import walker.{Client, Context, Entity, LapUnit, Session, Style, WeightUnit}
+import walker.control.{CalorieTextField, DateTimeSelector, IntTextField}
 
 final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
   initOwner(Client.stage)

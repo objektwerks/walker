@@ -1,10 +1,10 @@
-package swimmer.dialog
+package walker.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
-import swimmer.{Client, Context, Fault, Model}
+import walker.{Client, Context, Fault, Model}
 
 final class FaultsDialog(context: Context, model: Model) extends Dialog[Unit]:
   initOwner(Client.stage)
