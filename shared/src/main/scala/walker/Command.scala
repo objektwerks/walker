@@ -29,7 +29,7 @@ final case class Reactivate(license: String) extends Command with License
 final case class ListWalkers(license: String, accountId: Long) extends Command with License
 final case class SaveWalker(license: String, walker: Walker) extends Command with License
 
-final case class ListSessions(license: String, swimmerId: Long) extends Command with License
+final case class ListSessions(license: String, walkerId: Long) extends Command with License
 final case class SaveSession(license: String, session: Session) extends Command with License
 
 final case class AddFault(license: String, fault: Fault) extends Command with License

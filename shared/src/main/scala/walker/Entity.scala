@@ -43,7 +43,7 @@ object Walker:
   given swimmerOrdering: Ordering[Walker] = Ordering.by[Walker, String](s => s.name)
 
 final case class Session(id: Long = 0,
-                         swimmerId: Long,
+                         walkerId: Long,
                          weight: Int = 150,
                          weightUnit: String = WeightUnit.lb.toString,
                          laps: Int = 10,

@@ -43,7 +43,7 @@ object Validator:
     def isValid: Boolean = saveWalker.license.isLicense && saveWalker.walker.isValid
 
   extension (listSessions: ListSessions)
-    def isValid: Boolean = listSessions.license.isLicense && listSessions.swimmerId > 0
+    def isValid: Boolean = listSessions.license.isLicense && listSessions.walkerId > 0
 
   extension (saveSession: SaveSession)
     def isValid: Boolean = saveSession.license.isLicense && saveSession.session.isValid
@@ -76,7 +76,7 @@ object Validator:
   extension (session: Session)
     def isValid: Boolean =
       session.id >= 0 &&
-      session.swimmerId > 0 &&
+      session.walkerId > 0 &&
       session.weight > 0 &&
       session.weightUnit.length == 2 &&
       session.laps > 0 &&
