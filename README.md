@@ -103,7 +103,7 @@ Environment
 >The following environment variables must be defined:
 ```
 export WALKER_HOST="127.0.0.1"
-export WALKER_PORT=7171
+export WALKER_PORT=7070
 
 export WALKER_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/walker"
 export WALKER_POSTGRESQL_USER="yourusername"
