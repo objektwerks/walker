@@ -21,14 +21,10 @@ CREATE TABLE session (
   walker_id BIGINT REFERENCES walker(id),
   weight INT NOT NULL,
   weight_unit CHAR(2) NOT NULL,
-  laps INT NOT NULL,
-  lap_distance INT NOT NULL,
-  lap_unit VARCHAR(6) NOT NULL,
-  style VARCHAR(9) NOT NULL,
-  kickboard BOOLEAN NOT NULL,
-  fins BOOLEAN NOT NULL,
+  distance INT NOT NULL,
+  distance_unit CHAR(2) NOT NULL,
+  hours INT NOT NULL,
   minutes INT NOT NULL,
-  seconds INT NOT NULL,
   calories INT NOT NULL,
   datetime BIGINT NOT NULL
 );
