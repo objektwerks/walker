@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, 
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import walker.{Context, Model, Walker}
-import walker.dialog.{AccountDialog, FaultsDialog, SwimmerDialog, DeactivateReactivate}
+import walker.dialog.{AccountDialog, FaultsDialog, WalkerDialog, DeactivateReactivate}
 
 final class SwimmersPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -82,7 +82,7 @@ final class SwimmersPane(context: Context, model: Model) extends VBox:
   }
 
   def add(): Unit =
-    SwimmerDialog(context, Walker(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
+    WalkerDialog(context, Walker(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
       case Some(walker: Walker) => model.add(0, walker) {
         tableView.selectionModel().select(walker.copy(id = model.selectedWalkerId.value))
       }
@@ -91,7 +91,7 @@ final class SwimmersPane(context: Context, model: Model) extends VBox:
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val walker = tableView.selectionModel().getSelectedItem.swimmer
-    SwimmerDialog(context, walker).showAndWait() match
+    WalkerDialog(context, walker).showAndWait() match
       case Some(walker: Walker) => model.update(selectedIndex, walker) {
         tableView.selectionModel().select(selectedIndex)
       }

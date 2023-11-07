@@ -7,7 +7,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 
 import walker.{Client, Context, Walker}
 
-final class SwimmerDialog(context: Context, walker: Walker) extends Dialog[Walker]:
+final class WalkerDialog(context: Context, walker: Walker) extends Dialog[Walker]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogSwimmer
