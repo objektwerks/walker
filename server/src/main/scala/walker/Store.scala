@@ -201,23 +201,18 @@ final class Store(config: Config,
 
   def addSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      insert into session(walker_id, weight, weight_unit, laps, lap_distance,
-      lap_unit, style, kickboard, fins, minutes, seconds, calories, datetime)
-      values(${sess.walkerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.laps},
-      ${sess.lapDistance}, ${sess.lapUnit}, ${sess.style}, ${sess.kickboard},
-      ${sess.fins}, ${sess.minutes}, ${sess.seconds}, ${sess.calories}, ${sess.datetime})
+      insert into session(walker_id, weight, weight_unit, distance, distance_unit, hours, minutes, calories, datetime)
+      values(${sess.walkerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.distance}, ${sess.distanceUnit}, ${sess.hours},
+      ${sess.minutes}, ${sess.calories}, ${sess.datetime})
       """
       .updateAndReturnGeneratedKey()
   }
 
   def updateSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      update session set weight = ${sess.weight}, weight_unit = ${sess.weightUnit},
-      laps = ${sess.laps}, lap_distance = ${sess.lapDistance}, lap_unit = ${sess.lapUnit},
-      style = ${sess.style}, kickboard = ${sess.kickboard}, fins = ${sess.fins},
-      minutes = ${sess.minutes}, seconds = ${sess.seconds}, calories = ${sess.calories},
-      datetime = ${sess.datetime}
-      where id = ${sess.id}
+      update session set weight = ${sess.weight}, weight_unit = ${sess.weightUnit}, distance = ${sess.distance},
+      distance_unit = ${sess.distanceUnit}, hours = ${sess.hours}, minutes = ${sess.minutes}, calories = ${sess.calories},
+      datetime = ${sess.datetime} where id = ${sess.id}
       """
       .update()
     sess.id
