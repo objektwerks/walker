@@ -5,14 +5,14 @@ Walker
 Model
 -----
 >A session represents a workout, requiring the user to **replicate** data across sessions.
-* Account 1 ---> * Swimmer
-* Swimmer 1 ---> * Session
+* Account 1 ---> * Walker
+* Walker 1 ---> * Session
 
 Alternative Model
 -----------------
 >A workout represents an optional **template** for a session, removing the need to **replicate** data across sessions.
-* Account 1 ---> * Swimmer | Workout
-* Swimmer 1 ---> * Session
+* Account 1 ---> * Walker | Workout
+* Walker 1 ---> * Session
 
 Calculations
 ------------
@@ -75,50 +75,50 @@ Postgresql
 
 Database
 --------
->Example database url: postgresql://localhost:5432/swimmer?user=mycomputername&password=swimmer"
+>Example database url: postgresql://localhost:5432/walker?user=mycomputername&password=walker"
 1. psql postgres
-2. CREATE DATABASE swimmer OWNER [your computer name];
-3. GRANT ALL PRIVILEGES ON DATABASE swimmer TO [your computer name];
+2. CREATE DATABASE walker OWNER [your computer name];
+3. GRANT ALL PRIVILEGES ON DATABASE walker TO [your computer name];
 4. \l
 5. \q
-6. psql swimmer
+6. psql walker
 7. \i ddl.sql
 8. \q
 
 DDL
 ---
->Alternatively run: psql -d swimmer -f ddl.sql
-1. psql swimmer
+>Alternatively run: psql -d walker -f ddl.sql
+1. psql walker
 2. \i ddl.sql
 3. \q
 
 Drop
 ----
 1. psql postgres
-2. drop database swimmer;
+2. drop database walker;
 3. \q
 
 Environment
 -----------
 >The following environment variables must be defined:
 ```
-export SWIMMER_HOST="127.0.0.1"
-export SWIMMER_PORT=7171
+export WALKER_HOST="127.0.0.1"
+export WALKER_PORT=7171
 
-export SWIMMER_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/swimmer"
-export SWIMMER_POSTGRESQL_USER="yourusername"
-export SWIMMER_POSTGRESQL_PASSWORD="swimmer"
-export SWIMMER_POSTGRESQL_DRIVER="org.postgresql.ds.PGSimpleDataSource"
-export SWIMMER_POSTGRESQL_DB_NAME="swimmer"
-export SWIMMER_POSTGRESQL_HOST="127.0.0.1"
-export SWIMMER_POSTGRESQL_PORT=5432
-export SWIMMER_POSTGRESQL_POOL_INITIAL_SIZE=9
-export SWIMMER_POSTGRESQL_POOL_MAX_SIZE=32
-export SWIMMER_POSTGRESQL_POOL_CONNECTION_TIMEOUT_MILLIS=30000
+export WALKER_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/walker"
+export WALKER_POSTGRESQL_USER="yourusername"
+export WALKER_POSTGRESQL_PASSWORD="walker"
+export WALKER_POSTGRESQL_DRIVER="org.postgresql.ds.PGSimpleDataSource"
+export WALKER_POSTGRESQL_DB_NAME="walker"
+export WALKER_POSTGRESQL_HOST="127.0.0.1"
+export WALKER_POSTGRESQL_PORT=5432
+export WALKER_POSTGRESQL_POOL_INITIAL_SIZE=9
+export WALKER_POSTGRESQL_POOL_MAX_SIZE=32
+export WALKER_POSTGRESQL_POOL_CONNECTION_TIMEOUT_MILLIS=30000
 
-export SWIMMER_EMAIL_HOST="your-email.provider.com"
-export SWIMMER_EMAIL_ADDRESS="your-email@provider.com"
-export SWIMMER_EMAIL_PASSWORD="your-email-password"
+export WALKER_EMAIL_HOST="your-email.provider.com"
+export WALKER_EMAIL_ADDRESS="your-email@provider.com"
+export WALKER_EMAIL_PASSWORD="your-email-password"
 ```
 
 Resources
