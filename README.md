@@ -1,11 +1,6 @@
-Swimmer
+Walker
 -------
->Swimmer app using Scala 3, ScalaFX, ScalikeJdbc, Jsoniter, JoddMail and PostgreSql.
-
-Todo
-----
-1. Test Client
-2. Add app png
+>Walker app using Scala 3, ScalaFX, ScalikeJdbc, Jsoniter, JoddMail and PostgreSql.
 
 Model
 -----
