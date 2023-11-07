@@ -1,4 +1,4 @@
-package swimmer.chart
+package walker.chart
 
 import javafx.util.Duration
 
@@ -9,7 +9,7 @@ import scalafx.scene.Node
 import scalafx.scene.chart.{CategoryAxis, LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.Tooltip
 
-import swimmer.Context
+import walker.Context
 
 object LineChartBuilder:
   def build(context: Context,

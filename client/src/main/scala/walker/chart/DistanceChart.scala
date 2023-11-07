@@ -1,4 +1,4 @@
-package swimmer.chart
+package walker.chart
 
 import java.time.format.DateTimeFormatter
 
@@ -9,8 +9,8 @@ import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{ComboBox, Separator, Tab}
 import scalafx.scene.layout.{Region, VBox}
 
-import swimmer.{Context, Entity, Model, Style}
-import swimmer.dialog.ControlGridPane
+import walker.{Context, Entity, Model, Style}
+import walker.dialog.ControlGridPane
 
 final case class DistanceXY(xDate: String, yCount: Int)
 

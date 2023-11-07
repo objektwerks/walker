@@ -1,4 +1,4 @@
-package swimmer.chart
+package walker.chart
 
 import java.time.format.DateTimeFormatter
 
@@ -6,7 +6,7 @@ import scalafx.Includes.*
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.Tab
 
-import swimmer.{Context, Entity, Model}
+import walker.{Context, Entity, Model}
 
 final case class WeightXY(xDate: String, yCount: Double)
 
