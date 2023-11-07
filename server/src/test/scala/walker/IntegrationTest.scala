@@ -21,8 +21,8 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   var testAccount = Account()
-  var testSwimmer = Swimmer(accountId = 0, name = "")
-  var testSession = Session(swimmerId = 0, weight = 150, laps = 10, minutes = 15)
+  var testWalker = Walker(accountId = 0, name = "")
+  var testSession = Session(walkerId = 0, weight = 150, laps = 10, minutes = 15)
 
   test("integration"):
     register
@@ -68,28 +68,28 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid reactivated event: $fault")
 
   def addSwimmer: Unit =
-    testSwimmer = testSwimmer.copy(accountId = testAccount.id, name = "Fred")
-    val saveSwimmer = SaveSwimmer(testAccount.license, testSwimmer)
+    testWalker = testWalker.copy(accountId = testAccount.id, name = "Fred")
+    val saveSwimmer = SaveSwimmer(testAccount.license, testWalker)
     dispatcher.dispatch(saveSwimmer) match
       case SwimmerSaved(id) =>
         id should not be 0
-        testSwimmer = testSwimmer.copy(id = id)
+        testWalker = testWalker.copy(id = id)
         testSession = testSession.copy(swimmerId = id)
       case fault => fail(s"Invalid swimmer saved event: $fault")
 
   def updateSwimmer: Unit =
-    testSwimmer = testSwimmer.copy(name = "Fred Flintstone")
-    val saveSwimmer = SaveSwimmer(testAccount.license, testSwimmer)
+    testWalker = testWalker.copy(name = "Fred Flintstone")
+    val saveSwimmer = SaveSwimmer(testAccount.license, testWalker)
     dispatcher.dispatch(saveSwimmer) match
-      case SwimmerSaved(id) => id shouldBe testSwimmer.id
+      case SwimmerSaved(id) => id shouldBe testWalker.id
       case fault => fail(s"Invalid swimmer saved event: $fault")
     
   def listSwimmers: Unit =
-    val listSwimmers = ListSwimmers(testAccount.license, testSwimmer.accountId)
+    val listSwimmers = ListSwimmers(testAccount.license, testWalker.accountId)
     dispatcher.dispatch(listSwimmers) match
       case SwimmersListed(swimmers) =>
         swimmers.length shouldBe 1
-        swimmers.head shouldBe testSwimmer
+        swimmers.head shouldBe testWalker
       case fault => fail(s"Invalid swimmers listed event: $fault")
 
   def addSession: Unit =
@@ -108,7 +108,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid session saved event: $fault")
 
   def listSessions: Unit =
-    val listCleanings = ListSessions(testAccount.license, testSwimmer.id)
+    val listCleanings = ListSessions(testAccount.license, testWalker.id)
     dispatcher.dispatch(listCleanings) match
       case SessionsListed(sessions) =>
         sessions.length shouldBe 1
