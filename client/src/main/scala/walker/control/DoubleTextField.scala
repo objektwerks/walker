@@ -1,4 +1,4 @@
-package swimmer.control
+package walker.control
 
 import scalafx.scene.control.{TextField, TextFormatter}
 import scalafx.scene.control.TextFormatter.Change

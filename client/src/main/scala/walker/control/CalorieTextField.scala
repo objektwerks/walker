@@ -1,9 +1,9 @@
-package swimmer.control
+package walker.control
 
 import scalafx.scene.control.Button
 import scalafx.scene.layout.HBox
 
-import swimmer.Session
+import walker.Session
 
 class CalorieTextField(session: Session) extends HBox:
   val caloriesTextField = new IntTextField:

@@ -1,4 +1,4 @@
-package swimmer.control
+package walker.control
 
 import java.time.LocalDateTime
 
@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, Label, Spinner}
 import scalafx.scene.layout.{GridPane, HBox, Priority, VBox}
 import scalafx.stage.Popup
 
-import swimmer.{Context, Entity}
+import walker.{Context, Entity}
 
 final class DateTimeSelector(context: Context, localDateTime: LocalDateTime) extends HBox:
   spacing = 3
