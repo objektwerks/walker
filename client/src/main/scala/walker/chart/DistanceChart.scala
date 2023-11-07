@@ -2,15 +2,13 @@ package walker.chart
 
 import java.time.format.DateTimeFormatter
 
-import scalafx.collections.ObservableBuffer
-import scalafx.geometry.{Insets, Orientation}
+import scalafx.geometry.Insets
 import scalafx.Includes.*
 import scalafx.scene.chart.{LineChart, XYChart}
-import scalafx.scene.control.{ComboBox, Separator, Tab}
-import scalafx.scene.layout.{Region, VBox}
+import scalafx.scene.control.Tab
+import scalafx.scene.layout.VBox
 
 import walker.{Context, Entity, Model}
-import walker.dialog.ControlGridPane
 
 final case class DistanceXY(xDate: String, yCount: Int)
 

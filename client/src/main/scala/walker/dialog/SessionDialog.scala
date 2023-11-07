@@ -2,7 +2,7 @@ package walker.dialog
 
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
-import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog}
+import scalafx.scene.control.{ButtonType, ComboBox, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
@@ -41,14 +41,14 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   val datetimeSelector = DateTimeSelector( context, Entity.toLocalDateTime(session.datetime) )
 
   val controls = List[(String, Region)](
-    context.labelWeightUnit  -> weightTextField,
-    context.labelWeightUnit  -> weightUnitComboBox,
-    context.labelDistance    -> distanceTextField,
-    context.labelLapUnit     -> distanceUnitComboBox,
-    context.labelHours       -> hoursTextField,
-    context.labelMinutes     -> minutesTextField,
-    context.labelCalories    -> caloriesTextField,
-    context.labelDatetime    -> datetimeSelector
+    context.labelWeightUnit   -> weightTextField,
+    context.labelWeightUnit   -> weightUnitComboBox,
+    context.labelDistance     -> distanceTextField,
+    context.labelDistanceUnit -> distanceUnitComboBox,
+    context.labelHours        -> hoursTextField,
+    context.labelMinutes      -> minutesTextField,
+    context.labelCalories     -> caloriesTextField,
+    context.labelDatetime     -> datetimeSelector
   )
   dialogPane().content = ControlGridPane(controls)
 
