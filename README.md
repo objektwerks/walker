@@ -5,8 +5,7 @@ Walker
 Todo
 ----
 1. Test Client
-2. Update login and register pngs.
-3. Add app png
+2. Add app png
 
 Model
 -----
