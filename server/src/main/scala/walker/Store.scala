@@ -152,10 +152,10 @@ final class Store(config: Config,
       else None
     }
 
-  def listSwimmers(accountId: Long): List[Swimmer] = DB readOnly { implicit session =>
+  def listWalkers(accountId: Long): List[Walker] = DB readOnly { implicit session =>
     sql"select * from swimmer where account_id = $accountId order by name"
       .map(rs =>
-        Swimmer(
+        Walker(
           rs.long("id"),
           rs.long("account_id"),
           rs.string("name"), 
@@ -164,20 +164,20 @@ final class Store(config: Config,
       .list()
   }
 
-  def addSwimmer(swimmer: Swimmer): Long = DB localTx { implicit session =>
+  def addSwimmer(walker: Walker): Long = DB localTx { implicit session =>
     sql"""
-      insert into swimmer(account_id, name) values(${swimmer.accountId}, ${swimmer.name})
+      insert into walker(account_id, name) values(${walker.accountId}, ${walker.name})
       """
       .updateAndReturnGeneratedKey()
   }
 
-  def updateSwimmer(swimmer: Swimmer): Long = DB localTx { implicit session =>
+  def updateWalker(walker: Walker): Long = DB localTx { implicit session =>
     sql"""
-      update swimmer set name = ${swimmer.name}
-      where id = ${swimmer.id}
+      update walker set name = ${walker.name}
+      where id = ${walker.id}
       """
       .update()
-    swimmer.id
+    walker.id
   }
 
   def listSessions(swimmerId: Long): List[Session] = DB readOnly { implicit session =>
@@ -205,9 +205,9 @@ final class Store(config: Config,
 
   def addSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      insert into session(swimmer_id, weight, weight_unit, laps, lap_distance,
+      insert into session(walker_id, weight, weight_unit, laps, lap_distance,
       lap_unit, style, kickboard, fins, minutes, seconds, calories, datetime)
-      values(${sess.swimmerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.laps},
+      values(${sess.walkerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.laps},
       ${sess.lapDistance}, ${sess.lapUnit}, ${sess.style}, ${sess.kickboard},
       ${sess.fins}, ${sess.minutes}, ${sess.seconds}, ${sess.calories}, ${sess.datetime})
       """

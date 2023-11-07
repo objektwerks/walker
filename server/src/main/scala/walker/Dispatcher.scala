@@ -79,7 +79,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def listWalkers(accountId: Long): Event =
     Try {
-      WalkersListed(store.listSwimmers(accountId))
+      WalkersListed(store.listWalkers(accountId))
     }.recover { case NonFatal(error) => Fault("List walkers failed:", error) }
      .get
 
@@ -87,7 +87,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     Try {
       WalkerSaved(
         if walker.id == 0 then store.addSwimmer(walker)
-        else store.updateSwimmer(walker)
+        else store.updateWalker(walker)
       )
     }.recover { case NonFatal(error) => Fault("Save walker failed:", error) }
      .get
