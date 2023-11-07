@@ -180,22 +180,18 @@ final class Store(config: Config,
     walker.id
   }
 
-  def listSessions(swimmerId: Long): List[Session] = DB readOnly { implicit session =>
-    sql"select * from session where swimmer_id = $swimmerId order by datetime desc"
+  def listSessions(walkerId: Long): List[Session] = DB readOnly { implicit session =>
+    sql"select * from session where walker_id = $walkerId order by datetime desc"
       .map(rs =>
         Session(
           rs.long("id"),
-          rs.long("swimmer_id"),
+          rs.long("walker_id"),
           rs.int("weight"),
           rs.string("weight_unit"),
-          rs.int("laps"),
-          rs.int("lap_distance"),
-          rs.string("lap_unit"),
-          rs.string("style"),
-          rs.boolean("kickboard"),
-          rs.boolean("fins"),
+          rs.double("distance"),
+          rs.string("distance_unit"),
+          rs.int("hours"),
           rs.int("minutes"),
-          rs.int("seconds"),
           rs.int("calories"),
           rs.long("datetime")
         )
