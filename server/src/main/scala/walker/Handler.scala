@@ -1,4 +1,4 @@
-package swimmer
+package walker
 
 import com.github.plokhotnyuk.jsoniter_scala.core.*
 import com.sun.net.httpserver.{HttpExchange, HttpHandler}

@@ -1,4 +1,4 @@
-package swimmer
+package walker
 
 import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config

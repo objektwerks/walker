@@ -1,4 +1,4 @@
-package swimmer
+package walker
 
 import scala.util.Try
 import scala.util.control.NonFatal

@@ -1,4 +1,4 @@
-package swimmer
+package walker
 
 import com.sun.net.httpserver.HttpServer
 import com.typesafe.config.ConfigFactory
