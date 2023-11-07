@@ -49,7 +49,7 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
     children = List(addButton, editButton, faultsButton, accountButton)
   
   val tab = new Tab:
-  	text = context.tabSwimmers
+  	text = context.tabWalkers
   	closable = false
   	content = new VBox {
       spacing = 6

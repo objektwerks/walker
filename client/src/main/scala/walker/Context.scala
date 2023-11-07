@@ -68,7 +68,7 @@ final class Context(config: Config):
   val labelCalories = config.getString("label.calories")
   val labelDatetime = config.getString("label.datetime")
 
-  val tabSwimmers = config.getString("tab.swimmers")
+  val tabWalkers = config.getString("tab.walkers")
   val tabSessions = config.getString("tab.sessions")
   val tabCalories = config.getString("tab.calories")
   val tabWeight = config.getString("tab.weight")
