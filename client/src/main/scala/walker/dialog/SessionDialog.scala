@@ -6,8 +6,8 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import walker.{Client, Context, Entity, LapUnit, Session, Style, WeightUnit}
-import walker.control.{CalorieTextField, DateTimeSelector, IntTextField}
+import walker.{Client, Context, DistanceUnit, Entity, Session, WeightUnit}
+import walker.control.{CalorieTextField, DateTimeSelector, DoubleTextField, IntTextField}
 
 final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
   initOwner(Client.stage)
@@ -22,33 +22,19 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   	value = session.weightUnit.toString
   weightUnitComboBox.prefWidth = 200
 
-  val lapsTextField = new IntTextField:
-    text = session.laps.toString
+  val distanceTextField = new DoubleTextField:
+    text = session.distance.toString
 
-  val lapDistanceTextField = new IntTextField:
-    text = session.lapDistance.toString
+  val distanceUnitComboBox = new ComboBox[String]:
+  	items = ObservableBuffer.from( DistanceUnit.toList )
+  	value = session.distanceUnit.toString
+  distanceUnitComboBox.prefWidth = 150
 
-  val lapUnitComboBox = new ComboBox[String]:
-  	items = ObservableBuffer.from( LapUnit.toList )
-  	value = session.lapUnit.toString
-  lapUnitComboBox.prefWidth = 200
-
-  val styleComboBox = new ComboBox[String]:
-  	items = ObservableBuffer.from( Style.toList )
-  	value = session.style.toString
-  styleComboBox.prefWidth = 300
-
-  val kickboardCheckBox = new CheckBox:
-    selected = session.kickboard
-
-  val finsCheckBox = new CheckBox:
-    selected = session.fins
+  val hoursTextField = new IntTextField:
+    text = session.hours.toString
 
   val minutesTextField = new IntTextField:
     text = session.minutes.toString
-
-  val secondsTextField = new IntTextField:
-    text = session.seconds.toString
 
   val caloriesTextField = CalorieTextField(session)
 
@@ -57,14 +43,10 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   val controls = List[(String, Region)](
     context.labelWeightUnit  -> weightTextField,
     context.labelWeightUnit  -> weightUnitComboBox,
-    context.labelLaps        -> lapsTextField,
-    context.labelLapDistance -> lapDistanceTextField,
-    context.labelLapUnit     -> lapUnitComboBox,
-    context.labelStyle       -> styleComboBox,
-    context.labelKickboard   -> kickboardCheckBox,
-    context.labelFins        -> finsCheckBox,
+    context.labelDistance    -> distanceTextField,
+    context.labelLapUnit     -> distanceUnitComboBox,
+    context.labelHours       -> hoursTextField,
     context.labelMinutes     -> minutesTextField,
-    context.labelSeconds     -> secondsTextField,
     context.labelCalories    -> caloriesTextField,
     context.labelDatetime    -> datetimeSelector
   )
@@ -78,14 +60,10 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
       session.copy(
         weight = weightTextField.int(session.weight),
         weightUnit = weightUnitComboBox.value.value,
-        laps = lapsTextField.int(session.laps),
-        lapDistance = lapDistanceTextField.int(session.lapDistance),
-        lapUnit = lapUnitComboBox.value.value,
-        style = styleComboBox.value.value,
-        kickboard = kickboardCheckBox.selected.value,
-        fins = finsCheckBox.selected.value,
+        distance = distanceTextField.double(session.distance),
+        distanceUnit = distanceUnitComboBox.value.value,
+        hours = hoursTextField.int(session.hours),
         minutes = minutesTextField.int(session.minutes),
-        seconds = secondsTextField.int(session.seconds),
         calories = caloriesTextField.int(session.calories),
         datetime = Entity.toEpochMillis(datetimeSelector.value.value)
       )
