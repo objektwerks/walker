@@ -15,17 +15,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val registered = ObjectProperty[Boolean](true)
   val loggedin = ObjectProperty[Boolean](true)
 
-  val selectedSwimmerId = ObjectProperty[Long](0)
+  val selectedWalkerId = ObjectProperty[Long](0)
   val selectedSessionId = ObjectProperty[Long](0)
 
-  selectedSwimmerId.onChange { (_, oldSwimmerId, newSwimmerId) =>
+  selectedWalkerId.onChange { (_, oldSwimmerId, newSwimmerId) =>
     logger.info(s"*** selected swimmer id onchange event: $oldSwimmerId -> $newSwimmerId")
     shouldBeInFxThread("*** selected swimmer id onchange should be in fx thread.")
     sessions(newSwimmerId)
   }
 
   val objectAccount = ObjectProperty[Account](Account.empty)
-  val observableSwimmers = ObservableBuffer[Swimmer]()
+  val observableWalkers = ObservableBuffer[Walker]()
   val observableSessions = ObservableBuffer[Session]()
   val observableFaults = ObservableBuffer[Fault]()
 
@@ -33,7 +33,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
   }
 
-  observableSwimmers.onChange { (_, changes) =>
+  observableWalkers.onChange { (_, changes) =>
     logger.info(s"*** observable pools onchange event: $changes")
   }
 
@@ -102,35 +102,35 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def swimmers(): Unit =
     fetcher.fetchAsync(
-      ListSwimmers(objectAccount.get.license, objectAccount.get.id),
+      ListWalkers(objectAccount.get.license, objectAccount.get.id),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.swimmers", fault)
-        case SwimmersListed(swimmers) =>
-          observableSwimmers.clear()
-          observableSwimmers ++= swimmers
+        case WalkersListed(swimmers) =>
+          observableWalkers.clear()
+          observableWalkers ++= swimmers
         case _ => ()
     )
 
-  def add(selectedIndex: Int, swimmer: Swimmer)(runLast: => Unit): Unit =
+  def add(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
-      SaveSwimmer(objectAccount.get.license, swimmer),
+      SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", swimmer, fault)
-        case SwimmerSaved(id) =>
-          observableSwimmers += swimmer.copy(id = id)
-          observableSwimmers.sort()
-          selectedSwimmerId.set(id)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
+        case WalkerSaved(id) =>
+          observableWalkers += walker.copy(id = id)
+          observableWalkers.sort()
+          selectedWalkerId.set(id)
           runLast
         case _ => ()
     )
 
-  def update(selectedIndex: Int, swimmer: Swimmer)(runLast: => Unit): Unit =
+  def update(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
-      SaveSwimmer(objectAccount.get.license, swimmer),
+      SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", swimmer, fault)
-        case SwimmerSaved(id) =>
-          observableSwimmers.update(selectedIndex, swimmer)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
+        case WalkerSaved(id) =>
+          observableWalkers.update(selectedIndex, walker)
           runLast
         case _ => ()
     )
