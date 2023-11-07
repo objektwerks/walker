@@ -31,9 +31,9 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     deactivate
     reactivate
 
-    addSwimmer
-    updateSwimmer
-    listSwimmers
+    addWalker
+    updateWalker
+    listWalkers
 
     addSession
     updateSession
@@ -67,30 +67,30 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
       case Reactivated(account) => assert( account.isActivated )
       case fault => fail(s"Invalid reactivated event: $fault")
 
-  def addSwimmer: Unit =
+  def addWalker: Unit =
     testWalker = testWalker.copy(accountId = testAccount.id, name = "Fred")
-    val saveSwimmer = SaveSwimmer(testAccount.license, testWalker)
-    dispatcher.dispatch(saveSwimmer) match
-      case SwimmerSaved(id) =>
+    val saveWalker = SaveWalker(testAccount.license, testWalker)
+    dispatcher.dispatch(saveWalker) match
+      case WalkerSaved(id) =>
         id should not be 0
         testWalker = testWalker.copy(id = id)
-        testSession = testSession.copy(swimmerId = id)
-      case fault => fail(s"Invalid swimmer saved event: $fault")
+        testSession = testSession.copy(walkerId = id)
+      case fault => fail(s"Invalid walker saved event: $fault")
 
-  def updateSwimmer: Unit =
+  def updateWalker: Unit =
     testWalker = testWalker.copy(name = "Fred Flintstone")
-    val saveSwimmer = SaveSwimmer(testAccount.license, testWalker)
-    dispatcher.dispatch(saveSwimmer) match
-      case SwimmerSaved(id) => id shouldBe testWalker.id
-      case fault => fail(s"Invalid swimmer saved event: $fault")
+    val saveWalker = SaveWalker(testAccount.license, testWalker)
+    dispatcher.dispatch(saveWalker) match
+      case WalkerSaved(id) => id shouldBe testWalker.id
+      case fault => fail(s"Invalid walker saved event: $fault")
     
-  def listSwimmers: Unit =
-    val listSwimmers = ListSwimmers(testAccount.license, testWalker.accountId)
-    dispatcher.dispatch(listSwimmers) match
-      case SwimmersListed(swimmers) =>
-        swimmers.length shouldBe 1
-        swimmers.head shouldBe testWalker
-      case fault => fail(s"Invalid swimmers listed event: $fault")
+  def listWalkers: Unit =
+    val listWalkers = ListWalkers(testAccount.license, testWalker.accountId)
+    dispatcher.dispatch(listWalkers) match
+      case WalkersListed(walkers) =>
+        walkers.length shouldBe 1
+        walkers.head shouldBe testWalker
+      case fault => fail(s"Invalid walkers listed event: $fault")
 
   def addSession: Unit =
     val saveSession = SaveSession(testAccount.license, testSession)
