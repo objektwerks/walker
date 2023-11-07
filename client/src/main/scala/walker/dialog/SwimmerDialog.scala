@@ -5,15 +5,15 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import walker.{Client, Context, Swimmer}
+import walker.{Client, Context, Walker}
 
-final class SwimmerDialog(context: Context, swimmer: Swimmer) extends Dialog[Swimmer]:
+final class SwimmerDialog(context: Context, walker: Walker) extends Dialog[Walker]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogSwimmer
 
   val nameTextField = new TextField:
-    text = swimmer.name
+    text = walker.name
 
   val controls = List[(String, Region)](
     context.labelName -> nameTextField
@@ -25,7 +25,7 @@ final class SwimmerDialog(context: Context, swimmer: Swimmer) extends Dialog[Swi
 
   resultConverter = dialogButton =>
     if dialogButton == saveButtonType then
-      swimmer.copy(
+      walker.copy(
         name = nameTextField.text.value
       )
     else null
