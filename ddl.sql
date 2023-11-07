@@ -10,7 +10,7 @@ CREATE TABLE account (
   deactivated BIGINT NOT NULL
 );
 
-CREATE TABLE swimmer (
+CREATE TABLE walker (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
   name VARCHAR(24) NOT NULL
@@ -18,7 +18,7 @@ CREATE TABLE swimmer (
 
 CREATE TABLE session (
   id BIGSERIAL PRIMARY KEY,
-  swimmer_id BIGINT REFERENCES swimmer(id),
+  walker_id BIGINT REFERENCES walker(id),
   weight INT NOT NULL,
   weight_unit CHAR(2) NOT NULL,
   laps INT NOT NULL,
