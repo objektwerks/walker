@@ -79,11 +79,9 @@ object Validator:
       session.walkerId > 0 &&
       session.weight > 0 &&
       session.weightUnit.length == 2 &&
-      session.laps > 0 &&
-      session.lapDistance > 0 &&
-      session.lapUnit.length >= 4 &&
-      session.style.nonEmpty &&
+      session.distance > 0 &&
+      session.distanceUnit.length == 2 &&
+      session.hours >= 0 &&
       session.minutes > 0 &&
-      session.seconds >= 0 &&
       session.calories >= 0 &&
       session.datetime > 0
