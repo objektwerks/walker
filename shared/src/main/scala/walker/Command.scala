@@ -12,8 +12,8 @@ object Command:
   given JsonValueCodec[Login] = JsonCodecMaker.make[Login]
   given JsonValueCodec[Deactivate] = JsonCodecMaker.make[Deactivate]
   given JsonValueCodec[Reactivate] = JsonCodecMaker.make[Reactivate]
-  given JsonValueCodec[ListSwimmers] = JsonCodecMaker.make[ListSwimmers]
-  given JsonValueCodec[SaveSwimmer] = JsonCodecMaker.make[SaveSwimmer]
+  given JsonValueCodec[ListWalkers] = JsonCodecMaker.make[ListWalkers]
+  given JsonValueCodec[SaveWalker] = JsonCodecMaker.make[SaveWalker]
   given JsonValueCodec[ListSessions] = JsonCodecMaker.make[ListSessions]
   given JsonValueCodec[SaveSession] = JsonCodecMaker.make[SaveSession]
 
@@ -26,8 +26,8 @@ final case class Login(emailAddress: String, pin: String) extends Command
 final case class Deactivate(license: String) extends Command with License
 final case class Reactivate(license: String) extends Command with License
 
-final case class ListSwimmers(license: String, accountId: Long) extends Command with License
-final case class SaveSwimmer(license: String, swimmer: Swimmer) extends Command with License
+final case class ListWalkers(license: String, accountId: Long) extends Command with License
+final case class SaveWalker(license: String, swimmer: Swimmer) extends Command with License
 
 final case class ListSessions(license: String, swimmerId: Long) extends Command with License
 final case class SaveSession(license: String, session: Session) extends Command with License
