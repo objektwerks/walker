@@ -36,11 +36,11 @@ object Validator:
   extension (reactivate: Reactivate)
     def isValid: Boolean = reactivate.license.isLicense
 
-  extension (listSwimmers: ListWalkers)
-    def isValid: Boolean = listSwimmers.license.isLicense && listSwimmers.accountId > 0
+  extension (listWalkers: ListWalkers)
+    def isValid: Boolean = listWalkers.license.isLicense && listWalkers.accountId > 0
 
-  extension (saveSwimmer: SaveWalker)
-    def isValid: Boolean = saveSwimmer.license.isLicense && saveSwimmer.swimmer.isValid
+  extension (saveWalker: SaveWalker)
+    def isValid: Boolean = saveWalker.license.isLicense && saveWalker.walker.isValid
 
   extension (listSessions: ListSessions)
     def isValid: Boolean = listSessions.license.isLicense && listSessions.swimmerId > 0
@@ -67,11 +67,11 @@ object Validator:
       account.activated == 0 &&
       account.deactivated > 0
 
-  extension (swimmer: Swimmer)
+  extension (walker: Walker)
     def isValid =
-      swimmer.id >= 0 &&
-      swimmer.accountId > 0 &&
-      swimmer.name.length >= 2
+      walker.id >= 0 &&
+      walker.accountId > 0 &&
+      walker.name.length >= 2
 
   extension (session: Session)
     def isValid: Boolean =

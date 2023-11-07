@@ -29,7 +29,7 @@ final case class LoggedIn(account: Account) extends Event
 final case class Deactivated(account: Account) extends Event
 final case class Reactivated(account: Account) extends Event
 
-final case class WalkersListed(swimmers: List[Swimmer]) extends Event
+final case class WalkersListed(swimmers: List[Walker]) extends Event
 final case class WalkerSaved(id: Long) extends Event
 
 final case class SessionsListed(sessions: List[Session]) extends Event

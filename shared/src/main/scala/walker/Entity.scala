@@ -32,15 +32,15 @@ object Account:
   val empty = Account(license = "", emailAddress = "", pin = "", activated = 0, deactivated = 0)
   given JsonValueCodec[Account] = JsonCodecMaker.make[Account]
 
-final case class Swimmer(id: Long = 0,
+final case class Walker(id: Long = 0,
                          accountId: Long,
                          name: String) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
   val swimmer = this
 
-object Swimmer:
-  given JsonValueCodec[Swimmer] = JsonCodecMaker.make[Swimmer]
-  given swimmerOrdering: Ordering[Swimmer] = Ordering.by[Swimmer, String](s => s.name)
+object Walker:
+  given JsonValueCodec[Walker] = JsonCodecMaker.make[Walker]
+  given swimmerOrdering: Ordering[Walker] = Ordering.by[Walker, String](s => s.name)
 
 final case class Session(id: Long = 0,
                          swimmerId: Long,
