@@ -5,20 +5,20 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import walker.{Context, Model, Swimmer}
+import walker.{Context, Model, Walker}
 import walker.dialog.{AccountDialog, FaultsDialog, SwimmerDialog, DeactivateReactivate}
 
 final class SwimmersPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
-  val tableView = new TableView[Swimmer]():
+  val tableView = new TableView[Walker]():
     columns ++= List(
-      new TableColumn[Swimmer, String]:
+      new TableColumn[Walker, String]:
         text = context.headerName
         cellValueFactory = _.value.nameProperty
     )
-    items = model.observableSwimmers
+    items = model.observableWalkers
 
   val addButton = new Button:
     graphic = context.addImage
@@ -77,22 +77,22 @@ final class SwimmersPane(context: Context, model: Model) extends VBox:
   tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
     // model.update executes a remove and add on items. the remove passes a null selectedItem!
     if selectedItem != null then
-      model.selectedSwimmerId.value = selectedItem.id
+      model.selectedWalkerId.value = selectedItem.id
       editButton.disable = false
   }
 
   def add(): Unit =
-    SwimmerDialog(context, Swimmer(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
-      case Some(swimmer: Swimmer) => model.add(0, swimmer) {
-        tableView.selectionModel().select(swimmer.copy(id = model.selectedSwimmerId.value))
+    SwimmerDialog(context, Walker(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
+      case Some(walker: Walker) => model.add(0, walker) {
+        tableView.selectionModel().select(walker.copy(id = model.selectedWalkerId.value))
       }
       case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val swimmer = tableView.selectionModel().getSelectedItem.swimmer
-    SwimmerDialog(context, swimmer).showAndWait() match
-      case Some(swimmer: Swimmer) => model.update(selectedIndex, swimmer) {
+    val walker = tableView.selectionModel().getSelectedItem.swimmer
+    SwimmerDialog(context, walker).showAndWait() match
+      case Some(walker: Walker) => model.update(selectedIndex, walker) {
         tableView.selectionModel().select(selectedIndex)
       }
       case _ =>
