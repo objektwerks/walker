@@ -26,7 +26,7 @@ lazy val jsoniter = Seq(
   }
 )
 
-lazy val swimmer = (project in file("."))
+lazy val walker = (project in file("."))
   .aggregate(client, shared, server)
   .settings(common)
   .settings(
