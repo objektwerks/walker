@@ -1,12 +1,12 @@
-package swimmer.pane
+package walker.pane
 
 import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import swimmer.{Session, Context, Model}
-import swimmer.dialog.{ChartDialog, SessionDialog}
+import walker.{Session, Context, Model}
+import walker.dialog.{ChartDialog, SessionDialog}
 
 final class SessionsPane(context: Context, model: Model) extends VBox:
   spacing = 6

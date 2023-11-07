@@ -1,11 +1,11 @@
-package swimmer
+package walker
 
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{Priority, VBox}
 
-import swimmer.pane.{SessionsPane, SwimmersPane}
+import walker.pane.{SessionsPane, SwimmersPane}
 
 final class View(context: Context, model: Model):
   val vbox = new VBox:
