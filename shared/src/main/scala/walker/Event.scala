@@ -15,8 +15,8 @@ object Event:
   given JsonValueCodec[LoggedIn] = JsonCodecMaker.make[LoggedIn]
   given JsonValueCodec[Deactivated] = JsonCodecMaker.make[Deactivated]
   given JsonValueCodec[Reactivated] = JsonCodecMaker.make[Reactivated]
-  given JsonValueCodec[SwimmersListed] = JsonCodecMaker.make[SwimmersListed]
-  given JsonValueCodec[SwimmerSaved] = JsonCodecMaker.make[SwimmerSaved]
+  given JsonValueCodec[WalkersListed] = JsonCodecMaker.make[WalkersListed]
+  given JsonValueCodec[WalkerSaved] = JsonCodecMaker.make[WalkerSaved]
   given JsonValueCodec[SessionsListed] = JsonCodecMaker.make[SessionsListed]
   given JsonValueCodec[SessionSaved] = JsonCodecMaker.make[SessionSaved]
   given JsonValueCodec[Fault] = JsonCodecMaker.make[Fault]  
@@ -29,8 +29,8 @@ final case class LoggedIn(account: Account) extends Event
 final case class Deactivated(account: Account) extends Event
 final case class Reactivated(account: Account) extends Event
 
-final case class SwimmersListed(swimmers: List[Swimmer]) extends Event
-final case class SwimmerSaved(id: Long) extends Event
+final case class WalkersListed(swimmers: List[Swimmer]) extends Event
+final case class WalkerSaved(id: Long) extends Event
 
 final case class SessionsListed(sessions: List[Session]) extends Event
 final case class SessionSaved(id: Long) extends Event
