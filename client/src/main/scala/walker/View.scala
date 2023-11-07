@@ -5,7 +5,7 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{Priority, VBox}
 
-import walker.pane.{SessionsPane, SwimmersPane}
+import walker.pane.{SessionsPane, WalkersPane}
 
 final class View(context: Context, model: Model):
   val vbox = new VBox:
@@ -13,15 +13,15 @@ final class View(context: Context, model: Model):
     prefHeight = context.windowHeight
     padding = Insets(6)
 
-  val swimmersPane = SwimmersPane(context, model)
-  VBox.setVgrow(swimmersPane, Priority.Always)
+  val walkersPane = WalkersPane(context, model)
+  VBox.setVgrow(walkersPane, Priority.Always)
 
   val sessionsPane = SessionsPane(context, model)
   VBox.setVgrow(sessionsPane, Priority.Always)
 
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
-    items.addAll(swimmersPane, sessionsPane)
+    items.addAll(walkersPane, sessionsPane)
   }
   splitPane.setDividerPositions(0.20, 0.80)
   VBox.setVgrow(splitPane, Priority.Always)

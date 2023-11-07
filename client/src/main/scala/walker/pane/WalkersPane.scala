@@ -8,7 +8,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import walker.{Context, Model, Walker}
 import walker.dialog.{AccountDialog, FaultsDialog, WalkerDialog, DeactivateReactivate}
 
-final class SwimmersPane(context: Context, model: Model) extends VBox:
+final class WalkersPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
