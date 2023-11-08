@@ -9,7 +9,7 @@ Todo
 
 Model
 -----
->A session represents a workout, requiring the user to **replicate** data across sessions.
+>A session represents a walk.
 * Account 1 ---> * Walker
 * Walker 1 ---> * Session
 
