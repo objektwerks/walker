@@ -15,7 +15,7 @@ Model
 
 Calculations
 ------------
-1. [Calories Burned Swimming](https://www.calculatorpro.com/calculator/calories-burned-swimming-calculator/)
+1. [Calories Burned Walking](https://captaincalculator.com/health/calorie/calories-burned-walking-calculator/)
    
 Build
 -----
