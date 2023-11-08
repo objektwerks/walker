@@ -13,12 +13,6 @@ Model
 * Account 1 ---> * Walker
 * Walker 1 ---> * Session
 
-Alternative Model
------------------
->A workout represents an optional **template** for a session, removing the need to **replicate** data across sessions.
-* Account 1 ---> * Walker | Workout
-* Walker 1 ---> * Session
-
 Calculations
 ------------
 1. [Calories Burned Swimming](https://www.calculatorpro.com/calculator/calories-burned-swimming-calculator/)
