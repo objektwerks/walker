@@ -14,6 +14,7 @@ object Handler:
       logger.debug(s"Command: $command")
 
       val event = dispatcher.dispatch(command)
+      logger.debug(s"Event: $event")
       event match
         case fault @ Fault(cause, _) =>
           logger.error(cause)
