@@ -11,6 +11,7 @@ object Handler:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
+      logger.debug(s"Command: $command")
 
       val event = dispatcher.dispatch(command)
       event match
