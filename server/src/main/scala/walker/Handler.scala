@@ -7,7 +7,9 @@ import com.typesafe.scalalogging.Logger
 import scala.io.{Codec, Source}
 
 object Handler:
-  def apply(dispatcher: Dispatcher, store: Store, logger: Logger): HttpHandler = new HttpHandler:
+  def apply(dispatcher: Dispatcher,
+            store: Store,
+            logger: Logger): HttpHandler = new HttpHandler:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
