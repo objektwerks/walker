@@ -11,10 +11,10 @@ object Handler:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
-      logger.debug(s"Command: $command")
+      logger.debug(s"Handler command: $command")
 
       val event = dispatcher.dispatch(command)
-      logger.debug(s"Event: $event")
+      logger.debug(s"Handler event: $event")
       event match
         case fault @ Fault(cause, _) =>
           logger.error(cause)
