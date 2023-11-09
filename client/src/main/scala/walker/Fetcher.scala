@@ -15,7 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.jdk.FutureConverters.*
 
 final class Fetcher(context: Context) extends LazyLogging:
-  implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+  given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
   private val uri = URI(context.url)
   private val connectError = context.errorServer
   private val client = HttpClient
