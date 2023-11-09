@@ -41,7 +41,7 @@ final class Fetcher(context: Context) extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(json) )
       .build
 
-  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
+  private def sendAsync(httpRequest: HttpRequest): Future[HttpResponse[String]] =
     client
       .sendAsync( httpRequest, BodyHandlers.ofString )
       .asScala
@@ -53,7 +53,7 @@ final class Fetcher(context: Context) extends LazyLogging:
     val httpRequest = buildHttpRequest(commandJson)
     logger.info(s"*** Fetcher http request: $httpRequest")
 
-    sendAsyncHttpRequest(httpRequest).map { httpResponse =>
+    sendAsync(httpRequest).map { httpResponse =>
       val eventJson = httpResponse.body 
       val event = readFromString[Event](eventJson)
       logger.info(s"*** Fetcher event: $event")
