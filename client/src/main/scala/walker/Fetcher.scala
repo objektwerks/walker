@@ -23,7 +23,7 @@ final class Fetcher(context: Context) extends LazyLogging:
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build
 
-  logger.info(s"*** Fetcher fetching on: ${context.url}")
+  logger.info(s"*** Fetcher url: ${context.url}")
 
   private def fromCommandToJson(command: Command): String = writeToString[Command](command)
 
@@ -55,16 +55,16 @@ final class Fetcher(context: Context) extends LazyLogging:
     logger.info(s"*** fetch async command: $command")
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
-    logger.info(s"Http Request: $httpRequest")
+    logger.info(s"*** Fetcher http request: $httpRequest")
 
     sendAsyncHttpRequest(httpRequest).map { httpResponse =>
       val eventJson = httpResponse.body 
       val event = fromJsonToEvent(eventJson)
-      logger.info(s"*** fetch async event: $event")
+      logger.info(s"*** Fetcher event: $event")
       Platform.runLater(handler(event))
     }.recover {
       case error: Exception =>
         val fault = toFault(error)
-        logger.error(s"Fetch Async Fault: $fault")
+        logger.error(s"Fetcher fault: $fault")
         handler(fault)
     }
