@@ -27,11 +27,11 @@ object Server extends LazyLogging:
     http.createContext("/command", handler)
 
     http.start()
-    println(s"*** Press Control-C to shutdown Swimmer Http Server at: $host:$port")
-    logger.info(s"*** Swimmer Http Server started at: $host:$port")
+    println(s"*** Press Control-C to shutdown Walker Http Server at: $host:$port")
+    logger.info(s"*** Walker Http Server started at: $host:$port")
 
     sys.addShutdownHook:
       http.stop(10)
-      logger.info(s"*** Swimmer Http Server shutdown at: $host:$port")
+      logger.info(s"*** Walker Http Server shutdown at: $host:$port")
 
     Thread.currentThread().join()
