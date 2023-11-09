@@ -55,6 +55,7 @@ final class Fetcher(context: Context) extends LazyLogging:
     logger.info(s"*** fetch async command: $command")
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
+    logger.debug(s"Http Request: $httpRequest")
 
     sendAsyncHttpRequest(httpRequest).map { httpResponse =>
       val eventJson = httpResponse.body 
