@@ -25,12 +25,6 @@ final class Fetcher(context: Context) extends LazyLogging:
 
   logger.info(s"*** Fetcher url: ${context.url}")
 
-  private def toFault(error: Exception): Fault =
-    Fault(
-      if error.getMessage == null then connectError
-      else error.getMessage
-    )
-
   private def buildHttpRequest(json: String): HttpRequest =
     HttpRequest
       .newBuilder
@@ -60,7 +54,10 @@ final class Fetcher(context: Context) extends LazyLogging:
       Platform.runLater(handler(event))
     }.recover {
       case error: Exception =>
-        val fault = toFault(error)
+        val fault = Fault(
+          if error.getMessage == null then connectError
+          else error.getMessage
+        )
         logger.error(s"Fetcher fault: $fault")
         handler(fault)
     }
