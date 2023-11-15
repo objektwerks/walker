@@ -4,7 +4,7 @@ Walker
 
 Todo
 ----
-1. Test Client
+1. Test client
 2. Add app png
 
 Model
@@ -122,9 +122,9 @@ export WALKER_EMAIL_PASSWORD="your-email-password"
 Resources
 ---------
 * [JavaFX](https://openjfx.io/index.html)
+* [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
 * [ScalaFX](http://www.scalafx.org/)
 * [ScalikeJdbc](http://scalikejdbc.org/)
-* [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
 
 License
 -------
