@@ -23,8 +23,8 @@ final class Fetcher(context: Context) extends LazyLogging:
 
   logger.info(s"*** Fetcher url: $url")
 
-  def fetchAsync(command: Command,
-                 handler: Event => Unit): Unit =
+  def fetch(command: Command,
+            handler: Event => Unit): Unit =
     logger.info(s"*** Fetcher command: $command")
     val commandJson = writeToString[Command](command)
     Try {

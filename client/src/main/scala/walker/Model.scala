@@ -52,7 +52,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       AddFault(objectAccount.get.license, fault),
       (event: Event) => event match
         case fault @ Fault(cause, _) => onFetchAsyncFault("Model.add fault", fault)
@@ -63,7 +63,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def register(register: Register): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
@@ -72,7 +72,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
@@ -83,7 +83,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def deactivate(deactivate: Deactivate): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       deactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.deactivate", fault)
@@ -92,7 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def reactivate(reactivate: Reactivate): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       reactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.reactivate", fault)
@@ -101,7 +101,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def swimmers(): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListWalkers(objectAccount.get.license, objectAccount.get.id),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.swimmers", fault)
@@ -112,7 +112,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
@@ -125,7 +125,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
@@ -136,7 +136,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def sessions(swimmerId: Long): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListSessions(objectAccount.get.license, swimmerId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.sessions", fault)
@@ -147,7 +147,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save session", session, fault)
@@ -160,7 +160,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save session", session, fault)
