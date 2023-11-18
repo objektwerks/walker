@@ -21,7 +21,7 @@ final class Fetcher(context: Context) extends LazyLogging:
     .addHeader("Accept", "application/json")
     .build
 
-  logger.info(s"*** Fetcher url: $url")
+  logger.info(s"*** Fetcher url: $url endpoint: $endpoint")
 
   def fetch(command: Command,
             handler: Event => Unit): Unit =
