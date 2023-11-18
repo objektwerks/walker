@@ -11,10 +11,10 @@ import scala.util.Try
 import scala.util.control.NonFatal
 
 final class Fetcher(context: Context) extends LazyLogging:
-  private val url = context.url
-  private val endpoint = context.endpoint
-  private val connectError = context.errorServer
-  private val client = WebClient
+  val url = context.url
+  val endpoint = context.endpoint
+  val connectError = context.errorServer
+  val client = WebClient
     .builder
     .baseUri(url)
     .addHeader("Content-Type", "application/json; charset=UTF-8")
