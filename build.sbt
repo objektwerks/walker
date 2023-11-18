@@ -15,17 +15,6 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   )
 )
 
-lazy val jsoniter = Seq(
-  libraryDependencies ++= {
-    val jsoniterVersion = "2.24.4"
-    Seq(
-      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
-      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
-      "com.typesafe" % "config" % "1.4.2"
-    )
-  }
-)
-
 lazy val walker = (project in file("."))
   .aggregate(client, shared, server)
   .settings(common)
@@ -117,10 +106,14 @@ lazy val client = project
   )
 
 lazy val shared = project
-  .settings(common, jsoniter)
+  .settings(common)
   .settings(
     libraryDependencies ++= {
+      val jsoniterVersion = "2.24.4"
       Seq(
+        "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
+        "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
+        "com.typesafe" % "config" % "1.4.2",
         "org.scalafx" %% "scalafx" % "20.0.0-R31"
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
