@@ -1,3 +1,4 @@
+val helidonVersion = "4.0.0"
 val logbackVersion = "1.4.11"
 val scalatestVersion = "3.2.17"
 
@@ -94,7 +95,7 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.scalafx" %% "scalafx" % "21.0.0-R32",
-        "io.helidon.webclient" % "helidon-webclient" % "4.0.0",
+        "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion
       )
@@ -134,7 +135,7 @@ lazy val server = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "io.helidon.webserver" % "helidon-webserver" % "4.0.0",
+        "io.helidon.webserver" % "helidon-webserver" % helidonVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.6.0",
