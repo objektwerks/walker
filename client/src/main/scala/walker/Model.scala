@@ -41,12 +41,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** observable cleanings onchange event: $changes")
   }
 
-  def onFetchAsyncFault(source: String, fault: Fault): Unit =
+  def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
     logger.error(s"*** Cause: $cause")
     observableFaults += fault.copy(cause = cause)
 
-  def onFetchAsyncFault(source: String, entity: Entity, fault: Fault): Unit =
+  def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
     logger.error(s"*** Cause: $cause")
     observableFaults += fault.copy(cause = cause)
@@ -55,7 +55,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       AddFault(objectAccount.get.license, fault),
       (event: Event) => event match
-        case fault @ Fault(cause, _) => onFetchAsyncFault("Model.add fault", fault)
+        case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
         case FaultAdded() =>
           observableFaults += fault
           observableFaults.sort()
@@ -86,7 +86,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       deactivate,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.deactivate", fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.deactivate", fault)
         case Deactivated(account) => objectAccount.set(account)
         case _ => ()
     )
@@ -95,7 +95,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       reactivate,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.reactivate", fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
         case Reactivated(account) => objectAccount.set(account)
         case _ => ()
     )
@@ -104,7 +104,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       ListWalkers(objectAccount.get.license, objectAccount.get.id),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.swimmers", fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.swimmers", fault)
         case WalkersListed(swimmers) =>
           observableWalkers.clear()
           observableWalkers ++= swimmers
@@ -115,7 +115,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save swimmer", walker, fault)
         case WalkerSaved(id) =>
           observableWalkers += walker.copy(id = id)
           observableWalkers.sort()
@@ -128,7 +128,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save swimmer", walker, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save swimmer", walker, fault)
         case WalkerSaved(id) =>
           observableWalkers.update(selectedIndex, walker)
           runLast
@@ -139,7 +139,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       ListSessions(objectAccount.get.license, swimmerId),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.sessions", fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.sessions", fault)
         case SessionsListed(sessions) =>
           observableSessions.clear()
           observableSessions ++= sessions
@@ -150,7 +150,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save session", session, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save session", session, fault)
         case SessionSaved(id) =>
           observableSessions += session.copy(id = id)
           observableSessions.sort()
@@ -163,7 +163,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save session", session, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save session", session, fault)
         case SessionSaved(id) =>
           observableSessions.update(selectedIndex, session)
           runLast
