@@ -96,6 +96,7 @@ lazy val client = project
       Seq(
         "org.scalafx" %% "scalafx" % "21.0.0-R32",
         "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
+        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion
       )
@@ -115,7 +116,6 @@ lazy val shared = project
       Seq(
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
-        "com.typesafe" % "config" % "1.4.2",
         "org.scalafx" %% "scalafx" % "20.0.0-R31"
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
@@ -141,6 +141,7 @@ lazy val server = project
         "org.postgresql" % "postgresql" % "42.6.0",
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.1",
+        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion,
         "org.scalatest" %% "scalatest" % scalatestVersion % Test
