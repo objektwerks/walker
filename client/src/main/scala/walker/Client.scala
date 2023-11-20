@@ -42,6 +42,6 @@ object Client extends JFXApp3 with LazyLogging:
       case _ =>
     
     stage.show()
-    logger.info(s"*** Swimmer Client started, targeting: ${context.url}")
+    logger.info("*** Swimmer Client started, targeting: {}", context.url)
 
   override def stopApp(): Unit = logger.info("*** Client stopped.")
