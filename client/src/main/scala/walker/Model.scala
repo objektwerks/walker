@@ -19,7 +19,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedSessionId = ObjectProperty[Long](0)
 
   selectedWalkerId.onChange { (_, oldSwimmerId, newSwimmerId) =>
-    logger.info(s"*** selected swimmer id onchange event: $oldSwimmerId -> $newSwimmerId")
+    logger.info("*** selected swimmer id onchange event: {} -> {}", oldSwimmerId, newSwimmerId)
     shouldBeInFxThread("*** selected swimmer id onchange should be in fx thread.")
     sessions(newSwimmerId)
   }
@@ -30,25 +30,25 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableFaults = ObservableBuffer[Fault]()
 
   objectAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
+    logger.info("*** object account onchange event: {} -> {}", oldAccount, newAccount)
   }
 
   observableWalkers.onChange { (_, changes) =>
-    logger.info(s"*** observable pools onchange event: $changes")
+    logger.info("*** observable pools onchange event: {}", changes)
   }
 
   observableSessions.onChange { (_, changes) =>
-    logger.info(s"*** observable cleanings onchange event: $changes")
+    logger.info("*** observable cleanings onchange event: {}", changes)
   }
 
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error("*** Cause: {}", cause)
     observableFaults += fault.copy(cause = cause)
 
   def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error("*** Cause: {}", cause)
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
