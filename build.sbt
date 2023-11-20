@@ -6,11 +6,6 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.6-SNAPSHOT",
   scalaVersion := "3.3.1",
-  libraryDependencies ++= {
-    Seq(
-      "com.typesafe" % "config" % "1.4.2"
-    )
-  },
   scalacOptions ++= Seq(
     "-Wunused:all"
   )
