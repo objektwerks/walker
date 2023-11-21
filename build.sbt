@@ -4,7 +4,7 @@ val scalatestVersion = "3.2.17"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.8-SNAPSHOT",
+  version := "0.9-SNAPSHOT",
   scalaVersion := "3.3.1",
   scalacOptions ++= Seq(
     "-Wunused:all"
@@ -70,11 +70,11 @@ lazy val walker = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "walker-mac-0.8.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.8.jar"
-  else if (OS == "win") assemblyJarName := "walker-win-0.8.jar"
-  else if (OS == "linux") assemblyJarName := "walker-linux-0.8.jar"
-  else assemblyJarName := "walker-no-valid-target-specified-0.8.jar"
+  if (OS == "mac") assemblyJarName := "walker-mac-0.9.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.9.jar"
+  else if (OS == "win") assemblyJarName := "walker-win-0.9.jar"
+  else if (OS == "linux") assemblyJarName := "walker-linux-0.9.jar"
+  else assemblyJarName := "walker-no-valid-target-specified-0.9.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
