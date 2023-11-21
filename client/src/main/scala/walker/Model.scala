@@ -34,7 +34,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableWalkers.onChange { (_, changes) =>
-    logger.info("*** observable pools onchange event: {}", changes)
+    logger.info("*** observable walkers onchange event: {}", changes)
   }
 
   observableSessions.onChange { (_, changes) =>
