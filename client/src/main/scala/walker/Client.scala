@@ -26,13 +26,13 @@ object Client extends JFXApp3 with LazyLogging:
 
     model.registered.onChange { (_, _, _) =>
       Alerts.showRegisterAlert(context, stage)
-      logger.error("*** Swimmer Register failed. Client stopping ...")
+      logger.error("*** Walker Register failed. Client stopping ...")
       sys.exit(-1)
     }
 
     model.loggedin.onChange { (_, _, _) =>
       Alerts.showLoginAlert(context, stage)
-      logger.error("*** Swimmer Login failed. Client stopping ...")
+      logger.error("*** Walker Login failed. Client stopping ...")
       sys.exit(-1)
     }
     
@@ -42,6 +42,6 @@ object Client extends JFXApp3 with LazyLogging:
       case _ =>
     
     stage.show()
-    logger.info("*** Swimmer Client started, targeting: {}", context.url)
+    logger.info("*** Walker Client started, targeting: {}", context.url)
 
-  override def stopApp(): Unit = logger.info("*** Client stopped.")
+  override def stopApp(): Unit = logger.info("*** Walker Client stopped.")
