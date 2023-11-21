@@ -38,7 +38,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableSessions.onChange { (_, changes) =>
-    logger.info("*** observable cleanings onchange event: {}", changes)
+    logger.info("*** observable sessions onchange event: {}", changes)
   }
 
   def onFetchFault(source: String, fault: Fault): Unit =
