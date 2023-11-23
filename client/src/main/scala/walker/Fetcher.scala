@@ -13,7 +13,7 @@ import scala.util.control.NonFatal
 final class Fetcher(context: Context) extends LazyLogging:
   val url = context.url
   val endpoint = context.endpoint
-  val connectError = context.errorServer
+  val defaultError = context.errorServer
   val client = WebClient
     .builder
     .baseUri(url)
@@ -37,10 +37,7 @@ final class Fetcher(context: Context) extends LazyLogging:
       Platform.runLater(handler(event))
     }.recover {
       case NonFatal(error) =>
-        val fault = Fault(
-          if error.getMessage == null then connectError
-          else error.getMessage
-        )
+        val fault = Fault(error, defaultError)
         logger.error("*** fetcher fault: {}", fault)
         Platform.runLater(handler(fault))
     }
