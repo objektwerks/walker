@@ -1,6 +1,6 @@
 Walker
 ------
->Walker app using ScalaFX, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, Helidon and Scala 3.
+>Walker app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, Helidon and Scala 3.
 
 Todo
 ----
