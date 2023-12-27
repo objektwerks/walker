@@ -15,8 +15,10 @@ sealed trait Entity:
 object Entity:
   given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity]
 
-  def format(epochMillis: Long): String = toLocalDateTime(epochMillis).format(DateTimeFormatter.ISO_DATE_TIME)
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(DateTimeFormatter.ISO_DATE_TIME)
+  val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd, hh:mm a")
+
+  def format(epochMillis: Long): String = formatter.format( toLocalDateTime(epochMillis) )
+  def format(localDateTime: LocalDateTime): String = formatter.format(localDateTime)
 
   def toLocalDateTime(epochMillis: Long): LocalDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), ZoneOffset.UTC)
   def toEpochMillis(localDateTime: LocalDateTime): Long = localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli
