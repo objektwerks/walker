@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, Label, Spinner}
 import scalafx.scene.layout.{GridPane, HBox, Priority, VBox}
 import scalafx.stage.Popup
 
-import walker.{Context, Entity}
+import walker.{Client, Context, Entity}
 
 final class DateTimeSelector(context: Context, localDateTime: LocalDateTime) extends HBox:
   spacing = 3
@@ -33,7 +33,7 @@ final class DateTimeSelector(context: Context, localDateTime: LocalDateTime) ext
     popup.setHideOnEscape(false)
     val popupView = PopupView(context, value.value, popup, popupValue)
     popup.content.addOne(popupView)
-    popup.show(popup.ownerWindow.value)
+    popup.show(Client.stage)
 
   private def popupValue(popupLocalDateTime: LocalDateTime): Unit =
     value.value = popupLocalDateTime
