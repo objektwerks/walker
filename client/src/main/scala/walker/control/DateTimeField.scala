@@ -18,6 +18,7 @@ final class DateTimeField(context: Context, localDateTime: LocalDateTime) extend
 
   private val localDateTimeLabel = new Label:
     alignment = Pos.BASELINE_LEFT
+    prefHeight = 26.0
     text = Entity.format(localDateTime)
 
   private val localDateTimeButton = new Button:
