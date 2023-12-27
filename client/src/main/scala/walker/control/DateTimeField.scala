@@ -48,6 +48,7 @@ private final class PopupView(context: Context,
   val daySpinner = Spinner[Int](min = 1, max = 31, initialValue = localDateTime.getDayOfMonth, amountToStepBy = 1)
   val hourSpinner = Spinner[Int](min = 0, max = 23, initialValue = localDateTime.getHour, amountToStepBy = 1)
   val minuteSpinner = Spinner[Int](min = 0, max = 59, initialValue = localDateTime.getMinute, amountToStepBy = 1)
+  style = "-fx-background-color:white;-fx-border-color: gray;-fx-border-width:2;-fx-border-radius:3;-fx-hgap:3;-fx-vgap:3;"
 
   val controls = List[(String, Spinner[Int])](
     context.dateTimeSelectorYear -> yearSpinner,
