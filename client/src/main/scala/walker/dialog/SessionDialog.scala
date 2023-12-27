@@ -7,7 +7,8 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
 import walker.{Client, Context, DistanceUnit, Entity, Session, WeightUnit}
-import walker.control.{CalorieTextField, DateTimeSelector, DoubleTextField, IntTextField}
+import walker.control.{CalorieTextField, DoubleTextField, IntTextField}
+import walker.control.DateTimeField
 
 final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
   initOwner(Client.stage)
@@ -38,7 +39,7 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
 
   val caloriesTextField = CalorieTextField(session)
 
-  val datetimeSelector = DateTimeSelector( context, Entity.toLocalDateTime(session.datetime) )
+  val datetimeSelector = DateTimeField( context, Entity.toLocalDateTime(session.datetime) )
 
   val controls = List[(String, Region)](
     context.labelWeightUnit   -> weightTextField,

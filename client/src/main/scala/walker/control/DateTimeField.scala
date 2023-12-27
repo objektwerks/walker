@@ -10,7 +10,7 @@ import scalafx.stage.Popup
 
 import walker.{Client, Context, Entity}
 
-final class DateTimeSelector(context: Context, localDateTime: LocalDateTime) extends HBox:
+final class DateTimeField(context: Context, localDateTime: LocalDateTime) extends HBox:
   spacing = 3
   padding = Insets(3)
 
