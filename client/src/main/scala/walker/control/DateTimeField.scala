@@ -14,7 +14,7 @@ final class DateTimeField(context: Context, localDateTime: LocalDateTime) extend
   spacing = 3
   padding = Insets(3)
 
-  val value: ObjectProperty[LocalDateTime] = ObjectProperty(localDateTime)
+  val value = ObjectProperty[LocalDateTime](localDateTime)
 
   private val localDateTimeLabel = new Label:
     alignment = Pos.BASELINE_LEFT
@@ -70,13 +70,13 @@ private final class PopupView(context: Context,
     disable = false
     onAction = { _ =>
       popup.hide()
-      popupValue( value() )
+      popupValue( onValueChange() )
     }
 
   children = List(selector, closeButton)
   VBox.setVgrow(this, Priority.Always)
 
-  private def value(): LocalDateTime =
+  private def onValueChange(): LocalDateTime =
     LocalDateTime
       .of(
         yearSpinner.value.value,
