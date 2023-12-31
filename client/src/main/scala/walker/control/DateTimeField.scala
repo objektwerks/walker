@@ -15,6 +15,7 @@ final class DateTimeField(context: Context, localDateTime: LocalDateTime) extend
   padding = Insets(3)
 
   val value = ObjectProperty[LocalDateTime](localDateTime)
+  value.onChange { (_, _, newValue) => localDateTimeLabel.text = Entity.format(newValue) }
 
   private val localDateTimeLabel = new Label:
     alignment = Pos.BASELINE_LEFT
