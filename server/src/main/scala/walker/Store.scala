@@ -29,7 +29,7 @@ final class Store(config: Config,
 
   val dataSource: DataSource = {
     val ds = new HikariDataSource()
-    ds.setDataSourceClassName("org.postgresql.ds.PGPoolingDataSource") // org.postgresql.ds.PGSimpleDataSource
+    ds.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource")
     ds.addDataSourceProperty("url", url)
     ds.addDataSourceProperty("user", user)
     ds.addDataSourceProperty("password", password)
