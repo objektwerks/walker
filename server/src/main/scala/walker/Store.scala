@@ -23,7 +23,7 @@ object Store:
 
 final class Store(config: Config,
                   cache: Cache[String, String]) extends LazyLogging:
-  private val driverClassName = config.getString("driverClassName")
+  private val driverClassName = config.getString("db.driverClassName")
   private val url = config.getString("db.url")
   private val user = config.getString("db.user")
   private val password = config.getString("db.password")
