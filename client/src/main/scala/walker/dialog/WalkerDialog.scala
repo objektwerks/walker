@@ -10,7 +10,7 @@ import walker.{Client, Context, Walker}
 final class WalkerDialog(context: Context, walker: Walker) extends Dialog[Walker]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = context.dialogSwimmer
+  headerText = context.dialogWalker
 
   val nameTextField = new TextField:
     text = walker.name

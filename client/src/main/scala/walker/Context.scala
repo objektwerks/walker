@@ -31,7 +31,7 @@ final class Context(config: Config):
 
   val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogAccount = config.getString("dialog.account")
-  val dialogSwimmer = config.getString("dialog.swimmer")
+  val dialogWalker = config.getString("dialog.walker")
   val dialogSession = config.getString("dialog.session")
   val dialogCharts = config.getString("dialog.charts")
   val dialogFaults = config.getString("dialog.faults")
