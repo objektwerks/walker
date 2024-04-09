@@ -134,9 +134,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def sessions(swimmerId: Long): Unit =
+  def sessions(walkerId: Long): Unit =
     fetcher.fetch(
-      ListSessions(objectAccount.get.license, swimmerId),
+      ListSessions(objectAccount.get.license, walkerId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.sessions", fault)
         case SessionsListed(sessions) =>
