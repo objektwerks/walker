@@ -77,7 +77,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) =>
           objectAccount.set(account)
-          swimmers()
+          walkers()
         case _ => ()
     )
 
@@ -99,14 +99,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def swimmers(): Unit =
+  def walkers(): Unit =
     fetcher.fetch(
       ListWalkers(objectAccount.get.license, objectAccount.get.id),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.swimmers", fault)
-        case WalkersListed(swimmers) =>
+        case fault @ Fault(_, _) => onFetchFault("Model.walkers", fault)
+        case WalkersListed(walkers) =>
           observableWalkers.clear()
-          observableWalkers ++= swimmers
+          observableWalkers ++= walkers
         case _ => ()
     )
 
