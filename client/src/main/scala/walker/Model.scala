@@ -114,7 +114,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save swimmer", walker, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save walker", walker, fault)
         case WalkerSaved(id) =>
           observableWalkers += walker.copy(id = id)
           observableWalkers.sort()
@@ -127,7 +127,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save swimmer", walker, fault)
+        case fault @ Fault(_, _) => onFetchFault("Model.save walker", walker, fault)
         case WalkerSaved(id) =>
           observableWalkers.update(selectedIndex, walker)
           runLast
