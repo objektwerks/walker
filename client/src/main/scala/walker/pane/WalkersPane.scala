@@ -90,7 +90,7 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val walker = tableView.selectionModel().getSelectedItem.swimmer
+    val walker = tableView.selectionModel().getSelectedItem.walker
     WalkerDialog(context, walker).showAndWait() match
       case Some(walker: Walker) => model.update(selectedIndex, walker) {
         tableView.selectionModel().select(selectedIndex)

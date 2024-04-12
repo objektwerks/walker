@@ -38,7 +38,7 @@ final case class Walker(id: Long = 0,
                          accountId: Long,
                          name: String) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
-  val swimmer = this
+  val walker = this
 
 object Walker:
   given JsonValueCodec[Walker] = JsonCodecMaker.make[Walker]
