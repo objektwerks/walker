@@ -92,9 +92,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault("Save walker failed:", error) }
      .get
 
-  private def listSessions(swimmerId: Long): Event =
+  private def listSessions(walkerId: Long): Event =
     Try {
-      SessionsListed( store.listSessions(swimmerId) )
+      SessionsListed( store.listSessions(walkerId) )
     }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
      .get
 
