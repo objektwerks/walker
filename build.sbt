@@ -71,11 +71,11 @@ lazy val walker = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "walker-mac-0.18.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.18.jar"
-  else if (OS == "win") assemblyJarName := "walker-win-0.18.jar"
-  else if (OS == "linux") assemblyJarName := "walker-linux-0.18.jar"
-  else assemblyJarName := "walker-no-valid-target-specified-0.18.jar"
+  if (OS == "mac") assemblyJarName := "walker-mac-0.19.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.19.jar"
+  else if (OS == "win") assemblyJarName := "walker-win-0.19.jar"
+  else if (OS == "linux") assemblyJarName := "walker-linux-0.19.jar"
+  else assemblyJarName := "walker-no-valid-target-specified-0.19.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
