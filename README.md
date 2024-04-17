@@ -49,10 +49,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/walker-mac-0.11.jar
-2. java -jar .assembly/walker-m1-0.11.jar
-3. java -jar .assembly/walker-win-0.11.jar
-4. java -jar .assembly/walker-linux-0.11.jar
+1. java -jar .assembly/walker-mac-0.18.jar
+2. java -jar .assembly/walker-m1-0.18.jar
+3. java -jar .assembly/walker-win-0.18.jar
+4. java -jar .assembly/walker-linux-0.18.jar
 
 Deploy
 ------
