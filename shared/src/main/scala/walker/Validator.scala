@@ -16,7 +16,7 @@ object Validator:
         case deactivate @ Deactivate(_)        => deactivate.isValid
         case reactivate @ Reactivate(_)        => reactivate.isValid
         case listWalkers @ ListWalkers(_, _)   => listWalkers.isValid
-        case saveSwimmer @ SaveWalker(_, _)    => saveSwimmer.isValid
+        case saveWalker @ SaveWalker(_, _)     => saveWalker.isValid
         case listSessions @ ListSessions(_, _) => listSessions.isValid
         case saveSession @ SaveSession(_, _)   => saveSession.isValid
         case addFault @ AddFault(_, _)         => addFault.isValid
