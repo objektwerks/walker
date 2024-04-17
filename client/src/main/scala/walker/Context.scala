@@ -57,7 +57,7 @@ final class Context(config: Config):
   val labelPin = config.getString("label.pin")
   val labelActivated = config.getString("label.activated")
   val labelDeactivated = config.getString("label.deactivated")
-  val labelSwimmers = config.getString("label.swimmers")
+  val labelWalkers = config.getString("label.walkers")
   val labelSessions = config.getString("label.sessions")
   val labelName = config.getString("label.name")
   val labelWeight = config.getString("label.weight")
