@@ -42,7 +42,7 @@ final case class Walker(id: Long = 0,
 
 object Walker:
   given JsonValueCodec[Walker] = JsonCodecMaker.make[Walker]
-  given swimmerOrdering: Ordering[Walker] = Ordering.by[Walker, String](s => s.name)
+  given walkerOrdering: Ordering[Walker] = Ordering.by[Walker, String](s => s.name)
 
 final case class Session(id: Long = 0,
                          walkerId: Long,
