@@ -23,7 +23,7 @@ object Server extends LazyLogging:
 
     val builder = HttpRouting
       .builder
-      .get(endpoint, handler)
+      .post(endpoint, handler)
 
     WebServer
       .builder
