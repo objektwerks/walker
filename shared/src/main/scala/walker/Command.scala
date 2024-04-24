@@ -6,7 +6,7 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.*
 sealed trait Command
 
 object Command:
-  given JsonValueCodec[Command] = JsonCodecMaker.make[Command]
+  given JsonValueCodec[Command] = JsonCodecMaker.make[Command](CodecMakerConfig.withDiscriminatorFieldName(None))
   given JsonValueCodec[License] = JsonCodecMaker.make[License]
   given JsonValueCodec[Register] = JsonCodecMaker.make[Register]
   given JsonValueCodec[Login] = JsonCodecMaker.make[Login]
