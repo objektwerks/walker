@@ -13,7 +13,7 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity]
+  given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity](CodecMakerConfig.withDiscriminatorFieldName(None))
 
   val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd, hh:mm a")
 
