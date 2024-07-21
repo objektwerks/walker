@@ -36,7 +36,7 @@ object Account:
 
 final case class Walker(id: Long = 0,
                          accountId: Long,
-                         name: String) extends Entity:
+                         name: String) extends Entity derives CanEqual:
   val nameProperty = ObjectProperty[String](this, "name", name)
   val walker = this
 
