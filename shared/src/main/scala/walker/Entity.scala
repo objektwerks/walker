@@ -28,7 +28,7 @@ final case class Account(id: Long = 0,
                          emailAddress: String = "",
                          pin: String = Pin.newInstance,
                          activated: Long = Instant.now.toEpochMilli,
-                         deactivated: Long = 0) extends Entity
+                         deactivated: Long = 0) extends Entity derives CanEqual
 
 object Account:
   val empty = Account(license = "", emailAddress = "", pin = "", activated = 0, deactivated = 0)
