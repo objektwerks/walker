@@ -9,29 +9,25 @@ sealed trait Security
 case object Authorized extends Security
 final case class Unauthorized(cause: String) extends Security
 
-final class Dispatcher(store: Store, emailer: Emailer):
-  def dispatch[E <: Event](command: Command): Event =
-    if !command.isValid then store.addFault( Fault(s"Command is invalid: $command") )
-    
-    isAuthorized(command) match
-      case Authorized(isAuthorized) => if !isAuthorized then store.addFault( Fault(s"License is unauthorized: $command") )
-      case fault @ Fault(_, _) => store.addFault(fault)
-      case _ =>
-        
-    val event = command match
-      case Register(emailAddress)     => register(emailAddress)
-      case Login(emailAddress, pin)   => login(emailAddress, pin)
-      case Deactivate(license)        => deactivateAccount(license)
-      case Reactivate(license)        => reactivateAccount(license)
-      case ListWalkers(_, accountId)  => listWalkers(accountId)
-      case SaveWalker(_, walker)      => saveWalker(walker)
-      case ListSessions(_, walkerId)  => listSessions(walkerId)
-      case SaveSession(_, session)    => saveSession(session)
-      case AddFault(_, fault)         => addFault(fault)
-
-    event match
-      case fault @ Fault(_, _) => store.addFault(fault)
-      case _ => event
+final class Dispatcher(store: Store,
+                       emailer: Emailer):
+  def dispatch(command: Command): Event =
+    command.isValid match
+      case false => addFault( Fault(s"Invalid command: $command") )
+      case true =>
+        isAuthorized(command) match
+          case Unauthorized(cause) => addFault( Fault(cause) )
+          case Authorized =>
+            command match
+              case Register(emailAddress)     => register(emailAddress)
+              case Login(emailAddress, pin)   => login(emailAddress, pin)
+              case Deactivate(license)        => deactivateAccount(license)
+              case Reactivate(license)        => reactivateAccount(license)
+              case ListWalkers(_, accountId)  => listWalkers(accountId)
+              case SaveWalker(_, walker)      => saveWalker(walker)
+              case ListSessions(_, walkerId)  => listSessions(walkerId)
+              case SaveSession(_, session)    => saveSession(session)
+              case AddFault(_, fault)         => addFault(fault)
 
   def isAuthorized(command: Command): Security =
     command match
