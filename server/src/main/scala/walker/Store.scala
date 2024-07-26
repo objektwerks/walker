@@ -145,87 +145,95 @@ final class Store(cache: Cache[String, String],
       else None
     }
 
-  def listWalkers(accountId: Long): List[Walker] = DB readOnly { implicit session =>
-    sql"select * from walker where account_id = $accountId order by name"
-      .map(rs =>
-        Walker(
-          rs.long("id"),
-          rs.long("account_id"),
-          rs.string("name"), 
+  def listWalkers(accountId: Long): List[Walker] =
+    DB readOnly { implicit session =>
+      sql"select * from walker where account_id = $accountId order by name"
+        .map(rs =>
+          Walker(
+            rs.long("id"),
+            rs.long("account_id"),
+            rs.string("name"), 
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addWalker(walker: Walker): Long = DB localTx { implicit session =>
-    sql"""
-      insert into walker(account_id, name) values(${walker.accountId}, ${walker.name})
-      """
-      .updateAndReturnGeneratedKey()
-  }
+  def addWalker(walker: Walker): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into walker(account_id, name) values(${walker.accountId}, ${walker.name})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateWalker(walker: Walker): Long = DB localTx { implicit session =>
-    sql"""
-      update walker set name = ${walker.name}
-      where id = ${walker.id}
-      """
-      .update()
-    walker.id
-  }
+  def updateWalker(walker: Walker): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update walker set name = ${walker.name}
+        where id = ${walker.id}
+        """
+        .update()
+      walker.id
+    }
 
-  def listSessions(walkerId: Long): List[Session] = DB readOnly { implicit session =>
-    sql"select * from session where walker_id = $walkerId order by datetime desc"
-      .map(rs =>
-        Session(
-          rs.long("id"),
-          rs.long("walker_id"),
-          rs.int("weight"),
-          rs.string("weight_unit"),
-          rs.double("distance"),
-          rs.string("distance_unit"),
-          rs.int("hours"),
-          rs.int("minutes"),
-          rs.int("calories"),
-          rs.long("datetime")
+  def listSessions(walkerId: Long): List[Session] =
+    DB readOnly { implicit session =>
+      sql"select * from session where walker_id = $walkerId order by datetime desc"
+        .map(rs =>
+          Session(
+            rs.long("id"),
+            rs.long("walker_id"),
+            rs.int("weight"),
+            rs.string("weight_unit"),
+            rs.double("distance"),
+            rs.string("distance_unit"),
+            rs.int("hours"),
+            rs.int("minutes"),
+            rs.int("calories"),
+            rs.long("datetime")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addSession(sess: Session): Long = DB localTx { implicit session =>
-    sql"""
-      insert into session(walker_id, weight, weight_unit, distance, distance_unit, hours, minutes, calories, datetime)
-      values(${sess.walkerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.distance}, ${sess.distanceUnit}, ${sess.hours},
-      ${sess.minutes}, ${sess.calories}, ${sess.datetime})
-      """
-      .updateAndReturnGeneratedKey()
-  }
+  def addSession(sess: Session): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into session(walker_id, weight, weight_unit, distance, distance_unit, hours, minutes, calories, datetime)
+        values(${sess.walkerId}, ${sess.weight}, ${sess.weightUnit}, ${sess.distance}, ${sess.distanceUnit}, ${sess.hours},
+        ${sess.minutes}, ${sess.calories}, ${sess.datetime})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateSession(sess: Session): Long = DB localTx { implicit session =>
-    sql"""
-      update session set weight = ${sess.weight}, weight_unit = ${sess.weightUnit}, distance = ${sess.distance},
-      distance_unit = ${sess.distanceUnit}, hours = ${sess.hours}, minutes = ${sess.minutes}, calories = ${sess.calories},
-      datetime = ${sess.datetime} where id = ${sess.id}
-      """
-      .update()
-    sess.id
-  }
+  def updateSession(sess: Session): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update session set weight = ${sess.weight}, weight_unit = ${sess.weightUnit}, distance = ${sess.distance},
+        distance_unit = ${sess.distanceUnit}, hours = ${sess.hours}, minutes = ${sess.minutes}, calories = ${sess.calories},
+        datetime = ${sess.datetime} where id = ${sess.id}
+        """
+        .update()
+      sess.id
+    }
 
-  def listFaults(): List[Fault] = DB readOnly { implicit session =>
-    sql"select * from fault order by occurred desc"
-      .map(rs =>
-        Fault(
-          rs.string("cause"),
-          rs.string("occurred")
+  def listFaults(): List[Fault] =
+    DB readOnly { implicit session =>
+      sql"select * from fault order by occurred desc"
+        .map(rs =>
+          Fault(
+            rs.string("cause"),
+            rs.string("occurred")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addFault(fault: Fault): Fault = DB localTx { implicit session =>
-    sql"""
-      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
-      """
-      .update()
-      fault
-  }
+  def addFault(fault: Fault): Fault =
+    DB localTx { implicit session =>
+      sql"""
+        insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+        """
+        .update()
+        fault
+    }
