@@ -104,6 +104,10 @@ export WALKER_HOST="127.0.0.1"
 export WALKER_PORT=7070
 export WALKER_ENDPOINT="/command"
 
+export WALKER_CACHE_INITIAL_SIZE=4
+export WALKER_CACHE_MAX_SIZE=10
+export WALKER_CACHE_EXPIRE_AFTER=24
+
 export WALKER_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/walker"
 export WALKER_POSTGRESQL_USER="yourusername"
 export WALKER_POSTGRESQL_PASSWORD="walker"
