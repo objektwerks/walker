@@ -12,6 +12,8 @@ import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
 
 object Store:
+  def apply(config: Config) = new Store( cache(config), dataSource(config) )
+
   def cache(config: Config): Cache[String, String] =
     Scaffeine()
       .initialCapacity(config.getInt("cache.initialSize"))
