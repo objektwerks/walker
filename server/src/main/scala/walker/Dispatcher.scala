@@ -106,11 +106,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault("Save walker failed:", error) }
      .get
 
-  private def listSessions(walkerId: Long): Event =
-    Try {
-      SessionsListed( store.listSessions(walkerId) )
-    }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
-     .get
+  private def listSessions(swimmerId: Long)(using IO): Event =
+    Try:
+      SessionsListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listSessions(swimmerId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List sessions failed:", error)
+    .get
 
   private def saveSession(session: Session)(using IO): Event =
     Try:
