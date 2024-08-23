@@ -6,7 +6,7 @@ val oxVersion = "0.3.3"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.27",
+  version := "0.28-SNAPSHOT",
   scalaVersion := "3.5.0",
   scalacOptions ++= Seq(
     "-Wunused:all"
