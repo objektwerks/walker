@@ -112,14 +112,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
      .get
 
-  private def saveSession(session: Session): Event =
-    Try {
+  private def saveSession(session: Session)(using IO): Event =
+    Try:
       SessionSaved(
-        if session.id == 0 then store.addSession(session)
-        else store.updateSession(session)
+        if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
+        else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
       )
-    }.recover { case NonFatal(error) => Fault("Save cleaning failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save session failed:", error)
+    .get
 
   private def addFault(fault: Fault)(using IO): Event =
     Try:
