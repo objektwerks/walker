@@ -1,29 +1,32 @@
 package walker
 
+import ox.{IO, supervised}
+import ox.resilience.{retry, RetryConfig}
+
 import scala.util.Try
 import scala.util.control.NonFatal
 
 import Validator.*
 
-final class Dispatcher(store: Store,
-                       emailer: Emailer):
+final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch(command: Command): Event =
-    command.isValid match
-      case false => addFault( Fault(s"Invalid command: $command") )
-      case true =>
-        isAuthorized(command) match
-          case Unauthorized(cause) => addFault( Fault(cause) )
-          case Authorized =>
-            command match
-              case Register(emailAddress)     => register(emailAddress)
-              case Login(emailAddress, pin)   => login(emailAddress, pin)
-              case Deactivate(license)        => deactivateAccount(license)
-              case Reactivate(license)        => reactivateAccount(license)
-              case ListWalkers(_, accountId)  => listWalkers(accountId)
-              case SaveWalker(_, walker)      => saveWalker(walker)
-              case ListSessions(_, walkerId)  => listSessions(walkerId)
-              case SaveSession(_, session)    => saveSession(session)
-              case AddFault(_, fault)         => addFault(fault)
+    IO.unsafe:
+      command.isValid match
+        case false => addFault( Fault(s"Invalid command: $command") )
+        case true =>
+          isAuthorized(command) match
+            case Unauthorized(cause) => addFault( Fault(cause) )
+            case Authorized =>
+              command match
+                case Register(emailAddress)     => register(emailAddress)
+                case Login(emailAddress, pin)   => login(emailAddress, pin)
+                case Deactivate(license)        => deactivateAccount(license)
+                case Reactivate(license)        => reactivateAccount(license)
+                case ListWalkers(_, accountId)  => listWalkers(accountId)
+                case SaveWalker(_, walker)      => saveWalker(walker)
+                case ListSessions(_, walkerId)  => listSessions(walkerId)
+                case SaveSession(_, session)    => saveSession(session)
+                case AddFault(_, fault)         => addFault(fault)
 
   private def isAuthorized(command: Command): Security =
     command match
