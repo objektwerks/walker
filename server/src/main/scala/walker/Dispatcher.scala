@@ -104,8 +104,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def saveWalker(walker: Walker)(using IO): Event =
     Try:
       WalkerSaved(
-        if walker.id == 0 then store.addWalker(walker)
-        else store.updateWalker(walker)
+        if walker.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addWalker(walker) )
+        else retry( RetryConfig.delay(1, 100.millis) )( store.updateWalker(walker) )
       )
     .recover:
       case NonFatal(error) => Fault("Save walker failed:", error)
