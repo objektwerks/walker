@@ -94,7 +94,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def listWalkers(accountId: Long)(using IO): Event =
     Try:
       WalkersListed(
-        store.listWalkers(accountId)
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )(  store.listWalkers(accountId) )
       )
     .recover:
       case NonFatal(error) => Fault("List walkers failed:", error)
