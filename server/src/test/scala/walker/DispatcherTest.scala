@@ -4,7 +4,6 @@ import com.typesafe.config.ConfigFactory
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
-import ox.{IO, supervised}
 
 import scala.sys.process.Process
 
@@ -25,23 +24,21 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
   var testSession = Session(walkerId = 0)
 
   test("dispatcher"):
-    IO.unsafe:
-      supervised:
-        register
-        login
+    register
+    login
 
-        deactivate
-        reactivate
+    deactivate
+    reactivate
 
-        addWalker
-        updateWalker
-        listWalkers
+    addWalker
+    updateWalker
+    listWalkers
 
-        addSession
-        updateSession
-        listSessions
+    addSession
+    updateSession
+    listSessions
 
-        fault
+    fault
 
   def register: Unit =
     val register = Register(config.getString("email.sender"))
