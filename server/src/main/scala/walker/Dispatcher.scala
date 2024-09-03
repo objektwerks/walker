@@ -117,14 +117,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List sessions failed:", error)
 
   private def saveSession(session: Session)(using IO): Event =
-    Try:
+    try
       SessionSaved(
         if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
         else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("Save session failed:", error)
-    .get
 
   private def addFault(fault: Fault)(using IO): Event =
     Try:
