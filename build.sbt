@@ -4,9 +4,6 @@ val logbackVersion = "1.5.8"
 val scalatestVersion = "3.2.19"
 val oxVersion = "0.4.0"
 
-autoCompilerPlugins := true
-addCompilerPlugin("com.softwaremill.ox" %% "plugin" % oxVersion)
-
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.30-SNAPSHOT",
