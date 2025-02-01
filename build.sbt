@@ -21,8 +21,7 @@ lazy val walker = (project in file("."))
     publishLocal := {},
   )
 
-// Begin: Client Assembly Tasks
-
+// Begin: Assembly Tasks
   lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
   createAssemblyDir := {
     import java.nio.file._
@@ -52,38 +51,15 @@ lazy val walker = (project in file("."))
 
     Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
   }
+// End: Assembly Tasks
 
-// End: Client Assembly Tasks
-
-// Begin: Client Assembly
-
-  /*
-  See assembly section in readme.
-  1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-  2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-  3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-  4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
-  */
-  lazy val OS: String = sys.props.getOrElse("target", "") match {
-    case name if name.startsWith("mac")   => "mac"
-    case name if name.startsWith("m1")    => "mac-aarch64"
-    case name if name.startsWith("win")   => "win"
-    case name if name.startsWith("linux") => "linux"
-    case _ => ""
-  }
-
-  if (OS == "mac") assemblyJarName := "walker-mac-0.31.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.31.jar"
-  else if (OS == "win") assemblyJarName := "walker-win-0.31.jar"
-  else if (OS == "linux") assemblyJarName := "walker-linux-0.31.jar"
-  else assemblyJarName := "walker-no-valid-target-specified-0.31.jar"
-
-  client / assembly / assemblyMergeStrategy := {
-    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-    case x => MergeStrategy.first
-  }
-
-// End: Client Assembly
+// Begin: Assembly
+assemblyJarName := s"walker-${version.value}.jar"
+assembly / assemblyMergeStrategy := {
+  case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
+// End: Assembly
 
 lazy val client = project
   .dependsOn(shared)
