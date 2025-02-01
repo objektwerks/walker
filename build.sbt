@@ -54,7 +54,7 @@ lazy val walker = (project in file("."))
 // End: Assembly Tasks
 
 // Begin: Assembly
-assemblyJarName := s"walker-${version.value}.jar"
+assemblyJarName := s"walker-${common.version.value}.jar"
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
