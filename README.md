@@ -43,11 +43,7 @@ Client Assembly
 
 Execute Client
 --------------
->To execute an assembled jar locally:
-1. java -jar .assembly/walker-mac-1.0.0.jar
-2. java -jar .assembly/walker-m1-1.0.0.jar
-3. java -jar .assembly/walker-win-0.31.jar
-4. java -jar .assembly/walker-linux-0.31.jar
+1. java -jar .assembly/walker-$version.jar ( or double-click executable jar )
 
 Deploy
 ------
