@@ -39,17 +39,13 @@ Package Server
 
 Client Assembly
 ---------------
->To build for a "mac", "m1', "win" or "linux" os target:
-1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
+1. sbt clean test assembly copyAssemblyJar
 
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/walker-mac-0.31.jar
-2. java -jar .assembly/walker-m1-0.31.jar
+1. java -jar .assembly/walker-mac-1.0.0.jar
+2. java -jar .assembly/walker-m1-1.0.0.jar
 3. java -jar .assembly/walker-win-0.31.jar
 4. java -jar .assembly/walker-linux-0.31.jar
 
