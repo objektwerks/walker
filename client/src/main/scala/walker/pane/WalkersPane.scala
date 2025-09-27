@@ -90,13 +90,14 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
       case _ =>
 
   def update(): Unit =
-    val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val walker = tableView.selectionModel().getSelectedItem.walker
-    WalkerDialog(context, walker).showAndWait() match
-      case Some(walker: Walker) => model.update(selectedIndex, walker) {
-        tableView.selectionModel().select(selectedIndex)
-      }
-      case _ =>
+    if tableView.selectionModel().getSelectedItem != null then
+      val selectedIndex = tableView.selectionModel().getSelectedIndex
+      val walker = tableView.selectionModel().getSelectedItem.walker
+      WalkerDialog(context, walker).showAndWait() match
+        case Some(walker: Walker) => model.update(selectedIndex, walker) {
+          tableView.selectionModel().select(selectedIndex)
+        }
+        case _ =>
 
   def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait() match
       case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
