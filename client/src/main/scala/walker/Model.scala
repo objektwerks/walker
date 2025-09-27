@@ -101,15 +101,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def walkers(): Unit =
-    fetcher.fetch(
-      ListWalkers(objectAccount.get.license, objectAccount.get.id),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.walkers", fault)
-        case WalkersListed(walkers) =>
-          observableWalkers.clear()
-          observableWalkers ++= walkers
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list walkers")
+      fetcher.fetch(
+        ListWalkers(objectAccount.get.license, objectAccount.get.id),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("walkers", fault)
+          case WalkersListed(walkers) =>
+            observableWalkers.clear()
+            observableWalkers ++= walkers
+          case _ => ()
+      )
 
   def add(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
     println(s"remove: $selectedIndex")
