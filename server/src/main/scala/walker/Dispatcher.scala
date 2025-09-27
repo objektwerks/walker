@@ -105,7 +105,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       WalkerSaved(
         if walker.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addWalker(walker) )
-        else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateWalker(walker) )
+        else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateWalker(walker) )
       )
     catch
       case NonFatal(error) => Fault("Save walker failed:", error)
