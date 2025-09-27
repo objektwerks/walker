@@ -114,7 +114,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       SessionsListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listSessions(swimmerId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listSessions(swimmerId) )
       )
     catch
       case NonFatal(error) => Fault("List sessions failed:", error)
