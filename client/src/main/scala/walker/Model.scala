@@ -74,7 +74,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case _ @ Fault(_, _) => loggedin.set(false)
           case LoggedIn(account) =>
             objectAccount.set(account)
-            swimmers()
+            walkers()
           case _ => ()
       )
 
