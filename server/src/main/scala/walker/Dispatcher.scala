@@ -96,7 +96,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       WalkersListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )(  store.listWalkers(accountId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )(  store.listWalkers(accountId) )
       )
     catch
       case NonFatal(error) => Fault("List walkers failed:", error)
