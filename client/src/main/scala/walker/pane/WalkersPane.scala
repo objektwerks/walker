@@ -79,6 +79,7 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
     if selectedItem != null then
       model.selectedWalkerId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
