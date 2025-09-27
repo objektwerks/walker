@@ -147,6 +147,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
+    println(s"remove: $selectedIndex")
     fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
