@@ -111,6 +111,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, walker: Walker)(runLast: => Unit): Unit =
+    println(s"remove: $selectedIndex")
     fetcher.fetch(
       SaveWalker(objectAccount.get.license, walker),
       (event: Event) => event match
