@@ -136,9 +136,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update walker", walker, fault)
           case WalkerSaved(id) =>
-            observableWalkers.update(selectedIndex, walker)
-            logger.info(s"Updated walker from: $selectedIndex to: $walker")
-            runLast
+            if selectedIndex > -1 then
+              observableWalkers.update(selectedIndex, walker)      
+              logger.info(s"Updated walker from: $selectedIndex to: $walker")
+              runLast
+            else
+              logger.error(s"Update of walker from: $selectedIndex to: $walker failed due to invalid index: $selectedIndex")
           case _ => ()
       )
 
