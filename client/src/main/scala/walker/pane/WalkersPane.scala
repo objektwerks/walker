@@ -15,6 +15,7 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Walker]():
     columns ++= List(
       new TableColumn[Walker, String]:
+        prefWidth = 340
         text = context.headerName
         cellValueFactory = _.value.nameProperty
     )
