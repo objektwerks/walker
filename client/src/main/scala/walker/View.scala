@@ -23,7 +23,7 @@ final class View(context: Context, model: Model):
     orientation = Orientation.Horizontal
     items.addAll(walkersPane, sessionsPane)
   }
-  splitPane.setDividerPositions(0.35, 0.65)
+  splitPane.setDividerPositions(0.32, 0.68)
   VBox.setVgrow(splitPane, Priority.Always)
 
   vbox.children = List(splitPane)
