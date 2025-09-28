@@ -108,7 +108,7 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     SessionDialog(context, Session(walkerId = model.selectedWalkerId.value)).showAndWait() match
-      case Some(session: Session) => model.add(0, session) {
+      case Some(session: Session) => model.add(session) {
         tableView.selectionModel().select(0)
       }
       case _ =>
