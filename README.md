@@ -2,10 +2,6 @@ Walker
 ------
 >Walker app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, HikariCP, Helidon, Ox and Scala 3.
 
-Todo
-----
-1. Test client.
-
 Model
 -----
 >A session represents a walk.
