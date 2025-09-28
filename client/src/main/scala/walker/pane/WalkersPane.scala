@@ -84,7 +84,7 @@ final class WalkersPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     WalkerDialog(context, Walker(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
-      case Some(walker: Walker) => model.add(0, walker) {
+      case Some(walker: Walker) => model.add(walker) {
         tableView.selectionModel().select(walker.copy(id = model.selectedWalkerId.value))
       }
       case _ =>
