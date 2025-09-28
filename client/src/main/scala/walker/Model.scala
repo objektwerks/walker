@@ -143,15 +143,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def sessions(walkerId: Long): Unit =
-    fetcher.fetch(
-      ListSessions(objectAccount.get.license, walkerId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.sessions", fault)
-        case SessionsListed(sessions) =>
-          observableSessions.clear()
-          observableSessions ++= sessions
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"list sessions, walker id: $walkerId")
+      fetcher.fetch(
+        ListSessions(objectAccount.get.license, walkerId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("sessions", fault)
+          case SessionsListed(sessions) =>
+            observableSessions.clear()
+            observableSessions ++= sessions
+          case _ => ()
+      )
 
   def add(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
     println(s"remove: $selectedIndex")
