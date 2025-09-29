@@ -8,6 +8,8 @@ import scalafx.scene.layout.{Priority, VBox}
 import walker.pane.{SessionsPane, WalkersPane}
 
 final class View(context: Context, model: Model):
+  val menu = Menu(context)
+
   val vbox = new VBox:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
@@ -26,7 +28,7 @@ final class View(context: Context, model: Model):
   splitPane.setDividerPositions(0.32, 0.68)
   VBox.setVgrow(splitPane, Priority.Always)
 
-  vbox.children = List(splitPane)
+  vbox.children = List(menu, splitPane)
 
   val scene = new Scene:
     root = vbox
